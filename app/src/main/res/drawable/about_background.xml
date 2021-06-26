@@ -1,0 +1,98 @@
+<animated-vector
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt">
+    <aapt:attr name="android:drawable">
+        <vector
+            android:name="vector"
+            android:width="720dp"
+            android:height="1080dp"
+            android:viewportWidth="720"
+            android:viewportHeight="1080">
+            <path
+                android:name="path"
+                android:pathData="M -4.728 -10.124 L 731.458 -10.124 L 731.458 1089.088 L -4.728 1089.088 Z"
+                android:fillColor="#c22424"
+                android:strokeColor="#c22424"
+                android:strokeWidth="3.24127"/>
+            <path
+                android:name="path_1"
+                android:pathData="M 310.737 958.591 L 310.737 958.591 L 370.644 999.94 C 400.002 1020.204 389.088 1078.833 355.959 1078.833 L 36.465 1078.833 C 18.963 1078.833 4.775 1060.107 4.775 1037.005 L 4.775 816.187 C 4.775 784.747 30.07 764.547 51.17 779.135 Z"
+                android:fillColor="#000"
+                android:fillAlpha="0"
+                android:strokeColor="#d1d1d1"
+                android:strokeWidth="1.86705"/>
+            <path
+                android:name="path_2"
+                android:pathData="M 350.215 922.679 L 350.215 922.679 L 410.123 964.028 C 439.481 984.292 428.567 1042.921 395.438 1042.921 L 75.944 1042.921 C 58.442 1042.921 44.254 1024.195 44.254 1001.093 L 44.254 780.275 C 44.254 748.835 69.548 728.635 90.649 743.223 Z"
+                android:fillColor="#000"
+                android:fillAlpha="0"
+                android:strokeColor="#d1d1d1"
+                android:strokeWidth="1.86705"/>
+            <path
+                android:name="path_3"
+                android:pathData="M 341.635 88.581 L 521.698 39.8 L 641.215 12.19 C 667.889 6.028 689.692 31.906 676.181 53.69 L 568.46 227.364 C 559.978 241.04 540.899 245.881 525.846 238.174 L 335.217 140.581 C 311.164 128.267 315.178 95.748 341.635 88.581 Z"
+                android:fillColor="#000"
+                android:fillAlpha="0"
+                android:strokeColor="#d1d1d1"
+                android:strokeWidth="3.13892"/>
+            <path
+                android:name="path_4"
+                android:pathData="M 357.596 143.279 L 537.658 94.498 L 657.176 66.888 C 683.85 60.727 705.653 86.604 692.141 108.388 L 584.421 282.063 C 575.939 295.739 556.86 300.58 541.807 292.872 L 351.177 195.279 C 327.125 182.965 331.139 150.446 357.596 143.279 Z"
+                android:fillAlpha="0"
+                android:strokeColor="#d1d1d1"
+                android:strokeWidth="3.13892"/>
+        </vector>
+    </aapt:attr>
+    <target android:name="path_1">
+        <aapt:attr name="android:animation">
+            <objectAnimator
+                android:repeatMode="reverse"
+                android:repeatCount="infinite"
+                android:propertyName="strokeColor"
+                android:duration="2000"
+                android:valueFrom="#d1d1d1"
+                android:valueTo="#000000"
+                android:valueType="colorType"
+                android:interpolator="@android:anim/linear_interpolator"/>
+        </aapt:attr>
+    </target>
+    <target android:name="path_2">
+        <aapt:attr name="android:animation">
+            <objectAnimator
+                android:repeatMode="reverse"
+                android:repeatCount="infinite"
+                android:propertyName="strokeColor"
+                android:duration="2000"
+                android:valueFrom="#d1d1d1"
+                android:valueTo="#000000"
+                android:valueType="colorType"
+                android:interpolator="@android:anim/linear_interpolator"/>
+        </aapt:attr>
+    </target>
+    <target android:name="path_3">
+        <aapt:attr name="android:animation">
+            <objectAnimator
+                android:repeatMode="reverse"
+                android:repeatCount="infinite"
+                android:propertyName="strokeColor"
+                android:duration="2000"
+                android:valueFrom="#d1d1d1"
+                android:valueTo="#000000"
+                android:valueType="colorType"
+                android:interpolator="@android:anim/linear_interpolator"/>
+        </aapt:attr>
+    </target>
+    <target android:name="path_4">
+        <aapt:attr name="android:animation">
+            <objectAnimator
+                android:repeatMode="reverse"
+                android:repeatCount="infinite"
+                android:propertyName="strokeColor"
+                android:duration="2000"
+                android:valueFrom="#d1d1d1"
+                android:valueTo="#000000"
+                android:valueType="colorType"
+                android:interpolator="@android:anim/linear_interpolator"/>
+        </aapt:attr>
+    </target>
+</animated-vector>

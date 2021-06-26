@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Mine Klass</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="settings">Settings</string>
+    <string name="about">About</string>
+    <string name="schedule_test">8:00 AM - 9:00 AM</string>
+    <string name="header_image">Navigation Drawer Header Image</string>
+    <string name="schedule">Schedule</string>
+    <string name="settings_refresh_desc">Refresh data from the internet.</string>
+    <string name="refresh">Refresh</string>
+    <string name="splash_image">Splash Image.</string>
+    <string name="navigation_drawer_button">Navigation drawer button</string>
+    <string name="class_view_separator">Class view separator</string>
+    <string name="about_desc_text">Scheduler application for Islington College.</string>
+    <string name="code_by">Code by: Aabishkar Khanal</string>
+    <string name="deesign_by">Design by: Satish Shrestha</string>
+</resources>

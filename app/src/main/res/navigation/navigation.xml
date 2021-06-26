@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/titleFragment">
+
+    <fragment
+        android:id="@+id/titleFragment"
+        android:name="com.atme.mineklass.homePage.TitleFragment"
+        android:label="TitleFragment"
+        tools:layout="@layout/fragment_title"/>
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="com.atme.mineklass.about.AboutFragment"
+        android:label="@string/about"
+        tools:layout="@layout/fragment_about" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.atme.mineklass.settings.SettingsFragment"
+        android:label="@string/settings"
+        tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/scheduleFragment"
+        android:name="com.atme.mineklass.schedule.ScheduleFragment"
+        android:label="@string/schedule"
+        tools:layout="@layout/fragment_schedule">
+        <action
+            android:id="@+id/action_navigate_to_details"
+            app:destination="@id/classDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/classDetailFragment"
+        android:name="com.atme.mineklass.classDetails.ClassDetailFragment"
+        android:label="ClassDetailFragment"
+        tools:layout="@layout/fragment_class_detail">
+        <argument
+            android:name="classDataArg"
+            app:argType="com.atme.mineklass.classData.ClassData" />
+    </fragment>
+</navigation>
