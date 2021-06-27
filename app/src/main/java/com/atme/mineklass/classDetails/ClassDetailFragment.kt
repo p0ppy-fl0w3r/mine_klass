@@ -17,7 +17,7 @@ class ClassDetailFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         val binding = FragmentClassDetailBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = this
@@ -25,6 +25,8 @@ class ClassDetailFragment : Fragment() {
 
         val selectedClass = ClassDetailFragmentArgs.fromBundle(requireArguments()).classDataArg
 
+        // TODO Remove comment
+        // Used viewModel so that the class data can be edited in the future.
         val viewModelFactory = ClassDetailViewModelFactory(selectedClass)
         val viewModel =
             ViewModelProvider(this, viewModelFactory).get(ClassDetailViewModel::class.java)

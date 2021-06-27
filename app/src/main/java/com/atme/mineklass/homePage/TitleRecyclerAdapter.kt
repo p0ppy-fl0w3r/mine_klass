@@ -1,9 +1,7 @@
 package com.atme.mineklass.homePage
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -16,6 +14,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import timber.log.Timber
 import java.lang.ClassCastException
 
 private const val HEADER_ITEM: Int = 0
@@ -135,11 +134,14 @@ class TitleViewHolder(private val binding: TitleScheduleItemBinding) :
     }
 }
 
-// TODO change to binding?
 class HeaderViewHolder(private val binding:TitleHeaderBinding) : RecyclerView.ViewHolder(binding.root) {
 
     fun bind(header: DataItem.Header) {
-        binding.headerText.text = FULL_DAYS[header.day]
+        var headerText = FULL_DAYS[header.day]
+        if(headerText.isNullOrBlank()){
+            headerText = header.day
+        }
+        binding.headerText.text = headerText
         binding.textLinearLayout.setBackgroundResource(R.drawable.text_rect)
     }
 
@@ -152,7 +154,7 @@ class HeaderViewHolder(private val binding:TitleHeaderBinding) : RecyclerView.Vi
     }
 }
 
-sealed class DataItem() {
+sealed class DataItem {
 
     abstract val id: String
 

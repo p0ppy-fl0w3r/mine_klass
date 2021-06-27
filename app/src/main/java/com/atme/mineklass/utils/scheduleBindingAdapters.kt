@@ -1,9 +1,10 @@
-package com.atme.mineklass
+package com.atme.mineklass.utils
 
 import android.graphics.Color
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.databinding.BindingAdapter
+import com.atme.mineklass.R
 import com.atme.mineklass.classData.ClassData
 
 

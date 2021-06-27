@@ -21,6 +21,15 @@ class ClassDetailViewModel(classData: ClassData) : ViewModel() {
         it.module_title
     }
 
+    val moduleType = Transformations.map(liveClassData){
+        it.class_type
+    }
+
+    val moduleCode = Transformations.map(liveClassData){
+        it.module_name
+    }
+
+
     init {
         _liveClassData.value = classData
     }
