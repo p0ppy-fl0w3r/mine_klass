@@ -112,12 +112,7 @@ class TitleViewHolder(private val binding: TitleScheduleItemBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
     fun bind(userItem: UserClassData) {
-        binding.titleClassType.text = userItem.class_type
-        binding.titleRoomText.text = userItem.room
-        binding.titleBlockText.text = userItem.block
-        binding.titleSubjectText.text = userItem.module_title
-        binding.titleTimeText.text = userItem.time
-
+        binding.classData = userItem
     }
 
     companion object {

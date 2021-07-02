@@ -36,14 +36,12 @@ class MainActivity : AppCompatActivity() {
         NavigationUI.setupWithNavController(binding.navigationDrawer, navController)
 
         // Make sure that navigation drawer only opens in the title page.
-        navController.addOnDestinationChangedListener{
-            controller, destination, _ ->
-            if(controller.graph.startDestination != destination.id){
+        navController.addOnDestinationChangedListener { controller, destination, _ ->
+            if (controller.graph.startDestination != destination.id) {
                 drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
                 binding.toolbar.visibility = Toolbar.VISIBLE
                 binding.navButton.visibility = ImageView.GONE
-            }
-            else{
+            } else {
                 drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
                 binding.toolbar.visibility = Toolbar.GONE
                 binding.navButton.visibility = ImageView.VISIBLE

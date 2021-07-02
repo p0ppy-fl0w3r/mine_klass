@@ -3,6 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable
+            name="classData"
+            type="com.atme.mineklass.database.UserClassData" />
+    </data>
+
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/titleConstraintLayout"
@@ -17,6 +24,8 @@
             android:layout_height="wrap_content"
             android:textAppearance="@style/TextAppearance.AppCompat.Body2"
             android:textColor="#FFFFFFFF"
+            android:text="@{classData.time}"
+            app:isVisible="@{classData.time}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -28,6 +37,8 @@
             android:layout_height="wrap_content"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textColor="#FFFFFFFF"
+            android:text="@{classData.module_title}"
+            app:isVisible="@{classData.module_title}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/titleTimeText"
@@ -38,6 +49,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/default_bottom_padding"
+            android:text="@{classData.room}"
+            app:isVisible="@{classData.room}"
             android:textAppearance="@style/TextAppearance.AppCompat.Body2"
             android:textColor="#FFFFFFFF"
             app:layout_constraintEnd_toEndOf="parent"
@@ -50,6 +63,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/default_bottom_padding"
+            android:text="@{classData.block}"
+            app:isVisible="@{classData.block}"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textColor="#FFFFFFFF"
             app:layout_constraintEnd_toEndOf="parent"
@@ -62,6 +77,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/default_bottom_padding"
+            android:text="@{classData.class_type}"
+            app:isVisible="@{classData.class_type}"
             android:textAppearance="@style/TextAppearance.AppCompat.Body2"
             android:textColor="#FFFFFFFF"
             app:layout_constraintBottom_toBottomOf="parent"

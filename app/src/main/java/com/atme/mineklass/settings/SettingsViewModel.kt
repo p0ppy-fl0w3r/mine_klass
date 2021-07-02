@@ -2,6 +2,7 @@ package com.atme.mineklass.settings
 
 import android.app.Application
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.*
 import com.atme.mineklass.database.UserClassDatabase
 import com.atme.mineklass.repository.ClassRepository
@@ -16,12 +17,13 @@ class SettingsViewModel(application: Application) : AndroidViewModel(application
 
     fun refreshClassData() {
         viewModelScope.launch {
-
-                val database = UserClassDatabase.getInstance(getApplication())
-                val repository = ClassRepository(database)
+            val database = UserClassDatabase.getInstance(getApplication())
+            val repository = ClassRepository(database)
+            try {
                 repository.updateDatabase()
-
-
+            } catch (e: retrofit2.HttpException) {
+                Toast.makeText(getApplication(), "${e.message}", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 

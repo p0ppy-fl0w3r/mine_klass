@@ -16,12 +16,15 @@ interface UserClassDao {
     fun selectAll(): LiveData<List<UserClassData>>
 
     @Query("SELECT * FROM schedule_table WHERE id=:id")
-    fun getSchedule(id: String):UserClassData
+    suspend fun getSchedule(id: String):UserClassData
 
     @Query("SELECT * FROM schedule_table WHERE day=:day")
     suspend fun getDaySchedule(day: String):List<UserClassData>
 
     @Query("SELECT count(*) FROM schedule_table")
-    fun getItemCount():Int
+    suspend fun getItemCount():Int
+
+    @Query("DELETE FROM schedule_table")
+    suspend fun deleteAll()
 
 }

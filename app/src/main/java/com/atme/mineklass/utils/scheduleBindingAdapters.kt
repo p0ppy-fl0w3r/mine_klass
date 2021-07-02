@@ -1,6 +1,7 @@
 package com.atme.mineklass.utils
 
 import android.graphics.Color
+import android.view.View
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.databinding.BindingAdapter
@@ -34,6 +35,16 @@ fun setCardBackgroundColor(cardView: CardView, isToday: Boolean) {
         cardView.setCardBackgroundColor(cardView.context.getColor(R.color.secondaryLightColor))
     } else {
         cardView.setCardBackgroundColor(Color.parseColor("#FFFFFFFF"))
+    }
+}
+
+@BindingAdapter("isVisible")
+fun isVisible(textView: TextView, value: String){
+    if (value.isBlank()){
+        textView.visibility = View.GONE
+    }
+    else{
+        textView.visibility = View.VISIBLE
     }
 }
 

@@ -1,5 +1,7 @@
 package com.atme.mineklass.repository
 
+import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import com.atme.mineklass.classData.ClassData
@@ -29,7 +31,7 @@ class ClassRepository(private val database: UserClassDatabase) {
     suspend fun updateDatabase() {
         val classNetworkData =
             ClassNetworkApi.classNetworkApi.getClassData().asUserClassData()
+        database.scheduleDao.deleteAll()
         database.scheduleDao.insertAll(classNetworkData)
-
     }
 }

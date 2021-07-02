@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    >
 
     <!--  This might be changed to ScrollView later  -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
         android:orientation="vertical">
-        <!--Might have cardViews later-->
-        <!--TEST-->
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -20,8 +20,26 @@
             android:id="@+id/refreshButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
             android:text="@string/refresh"
+            android:layout_gravity="center"
+            android:textAllCaps="false" />
+
+        <EditText
+            android:id="@+id/jsonDataWebsite"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:layout_marginTop="8dp"
+            android:inputType="textPersonName"
+            android:hint="@string/change_data_url"
+            android:importantForAutofill="no" />
+
+        <Button
+            android:id="@+id/change_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/save"
             android:textAllCaps="false"/>
     </LinearLayout>
 

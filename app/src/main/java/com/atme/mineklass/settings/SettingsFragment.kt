@@ -16,7 +16,7 @@ class SettingsFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         val binding = FragmentSettingsBinding.inflate(inflater, container, false)
 
@@ -34,16 +34,10 @@ class SettingsFragment : Fragment() {
             viewModel.startRefresh()
         }
 
+        binding.changeButton.setOnClickListener {
+            Toast.makeText(context, "To be implemented!!", Toast.LENGTH_SHORT).show()
+        }
+
         return binding.root
-    }
-
-    override fun onPause() {
-        super.onPause()
-        Timber.e("On pause called.")
-    }
-
-    override fun onStop() {
-        super.onStop()
-        Timber.e("On stop called.")
     }
 }

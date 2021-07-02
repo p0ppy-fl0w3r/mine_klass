@@ -6,15 +6,11 @@ import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
-import retrofit2.http.Header
-import retrofit2.http.Headers
 
 
-private const val BASE_URL = "https://api.jsonbin.io/b/"
-private const val BIN_ID = "604e45967ffeba41c078bd1f"
-private const val BIN_ID2 = "604e3a6b7ea6546cf3dd7f38"
+private const val BASE_URL = "https://jsonkeeper.com/b/"
+private const val BIN_ID = "DJIC"
 
-// Todo handle 404 errors
 
 private val moshi: Moshi = Moshi.Builder()
     .add(KotlinJsonAdapterFactory())
