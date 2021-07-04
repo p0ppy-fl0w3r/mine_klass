@@ -1,6 +1,7 @@
 package com.atme.mineklass.homePage
 
 
+import android.app.Activity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -17,10 +18,17 @@ import timber.log.Timber
 import java.time.ZoneId
 
 
+/*
+* Any feature that uses the internet is disabled for now. These features were not implemented properly
+* in the first place, so I thought it would be a good idea to disable/remove them for now and come back
+* to it later.
+* */
+
 class TitleFragment : Fragment() {
+
     private val viewModel: TitleViewModel by lazy { ViewModelProvider(this).get(TitleViewModel::class.java) }
 
-
+    // TODO observe changes in data and change class accordingly
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -38,15 +46,36 @@ class TitleFragment : Fragment() {
         binding.titleCard.background =
             ContextCompat.getDrawable(requireContext(), R.drawable.card_rect)
 
+        val pref = requireActivity().getPreferences(Activity.MODE_PRIVATE)
+
+        if (!pref.contains(requireContext().getString(R.string.data_from_internet))) {
+
+            Timber.e("There was no prefs")
+
+            pref.edit().putString(
+                requireContext().getString(R.string.data_from_internet),
+                requireContext().getString(R.string.pref_data)
+            ).apply()
+
+            //viewModel.getFromInternet()
+            viewModel.updateDay()
+        }
+        else{
+            viewModel.updateDay()
+        }
 
 
         viewModel.dayData.observe(viewLifecycleOwner, {
+            Timber.e("Day data updated.")
             adapter.addHeaderAndSubmitList(it)
             // Start the counter with the first class in the list
             viewModel.updateClassIndex(0)
         })
 
         viewModel.currentClassIndex.observe(viewLifecycleOwner) {
+
+            Timber.e("Updated class index to $it")
+
             if (it >= viewModel.dayData.value?.size ?: 0) {
                 binding.timeRemaining.text = getString(R.string.no_class_today)
             } else {

@@ -52,6 +52,15 @@
             android:text="@{viewModel.moduleCode}"
             tools:text="CS-42069"
             />
+        <!-- TEST replace id with class name -->
+        <TextView
+            android:id="@+id/classId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@{viewModel.id}"
+            tools:text="C11-0"
+            />
 
     </LinearLayout>
 </layout>

@@ -8,9 +8,10 @@ import com.atme.mineklass.database.UserClassData
 import com.atme.mineklass.database.UserClassDatabase
 import com.atme.mineklass.repository.ClassRepository
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import java.util.*
 
-
+// TODO handle wifi/internet turned off
 class TitleViewModel(application: Application) : AndroidViewModel(application) {
 
     private val _mDays =
@@ -45,27 +46,36 @@ class TitleViewModel(application: Application) : AndroidViewModel(application) {
     val currentClass: LiveData<UserClassData>
         get() = _currentClass
 
+    private val database = UserClassDatabase.getInstance(getApplication())
+    private val repository = ClassRepository(database)
+
     init {
         updateDay()
     }
 
     fun updateDay() {
         viewModelScope.launch {
-            val database = UserClassDatabase.getInstance(getApplication())
-            val repository = ClassRepository(database)
+
             val currentDay = Calendar.getInstance().get(Calendar.DAY_OF_WEEK)
-
-            /* Get the data from the internet if the database is empty.
-             This makes sure that the first page is not empty-
-             when the app is started for the first time */
-
-            repository.reloadSchedule()
 
             // Kotlin hash map returns a nullable string(String?) instead of String.
             // All the values are accounted for. Trust me :)
 
             val weekDay: String = _mDays[currentDay]!!
-            _dayData.value = database.scheduleDao.getDaySchedule(weekDay)
+            _dayData.value = repository.getDaySchedule(weekDay)
+            Timber.i("Updated data from repository.")
+        }
+    }
+
+    fun getFromInternet() {
+        /* Get the data from the internet if the database is empty.
+             This makes sure that the first page is not empty-
+             when the app is started for the first time */
+        viewModelScope.launch {
+
+            Timber.e("Getting data from the internet")
+            repository.updateDatabase()
+            Timber.e("Got data from the internet.")
         }
     }
 

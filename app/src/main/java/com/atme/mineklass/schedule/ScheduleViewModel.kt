@@ -9,6 +9,7 @@ import com.atme.mineklass.repository.ClassRepository
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
+// TODO change stuff
 class ScheduleViewModel(application: Application) : AndroidViewModel(application) {
 
     private val database = UserClassDatabase.getInstance(application)
@@ -30,7 +31,7 @@ class ScheduleViewModel(application: Application) : AndroidViewModel(application
     private fun getClassData() {
         viewModelScope.launch {
             try {
-                ClassRepository(database).reloadSchedule()
+                //ClassRepository(database).reloadSchedule()
                 Timber.d("getClassData was called.")
             } catch (e: Exception) {
                 Timber.e("Failed: $e")
