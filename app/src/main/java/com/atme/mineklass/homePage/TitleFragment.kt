@@ -1,6 +1,7 @@
 package com.atme.mineklass.homePage
 
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -29,6 +30,7 @@ class TitleFragment : Fragment() {
     private val viewModel: TitleViewModel by lazy { ViewModelProvider(this).get(TitleViewModel::class.java) }
 
     // TODO observe changes in data and change class accordingly
+    @SuppressLint("ClickableViewAccessibility")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -50,8 +52,6 @@ class TitleFragment : Fragment() {
 
         if (!pref.contains(requireContext().getString(R.string.data_from_internet))) {
 
-            Timber.e("There was no prefs")
-
             pref.edit().putString(
                 requireContext().getString(R.string.data_from_internet),
                 requireContext().getString(R.string.pref_data)
@@ -59,8 +59,7 @@ class TitleFragment : Fragment() {
 
             //viewModel.getFromInternet()
             viewModel.updateDay()
-        }
-        else{
+        } else {
             viewModel.updateDay()
         }
 
@@ -93,7 +92,12 @@ class TitleFragment : Fragment() {
         }
 
         viewModel.remainingTime.observe(viewLifecycleOwner) {
-            binding.timeRemaining.text = getString(R.string.time_remaining, formatTime(it))
+            if (it > 0) {
+                binding.timeRemaining.text = getString(R.string.time_remaining, formatTime(it))
+            }
+            else{
+                binding.timeRemaining.text = getString(R.string.no_class_today)
+            }
         }
 
         // Inflate the layout for this fragment

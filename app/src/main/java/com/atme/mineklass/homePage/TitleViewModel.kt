@@ -9,7 +9,7 @@ import com.atme.mineklass.database.UserClassDatabase
 import com.atme.mineklass.repository.ClassRepository
 import kotlinx.coroutines.launch
 import timber.log.Timber
-import java.util.*
+import java.util.Calendar
 
 // TODO handle wifi/internet turned off
 class TitleViewModel(application: Application) : AndroidViewModel(application) {
@@ -48,6 +48,7 @@ class TitleViewModel(application: Application) : AndroidViewModel(application) {
 
     private val database = UserClassDatabase.getInstance(getApplication())
     private val repository = ClassRepository(database)
+
 
     init {
         updateDay()
@@ -96,6 +97,10 @@ class TitleViewModel(application: Application) : AndroidViewModel(application) {
     private fun startTimer(mil: Long) {
 
         viewModelScope.launch {
+            if (::timer.isInitialized){
+                // Make sure any previous timers are canceled.
+                timer.cancel()
+            }
             timer = object : CountDownTimer(mil, second) {
 
                 override fun onTick(millisUntilFinished: Long) {

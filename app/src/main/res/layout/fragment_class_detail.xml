@@ -6,61 +6,80 @@
     <data>
 
         <variable
-            name="viewModel"
-            type="com.atme.mineklass.classDetails.ClassDetailViewModel" />
+            name="classData"
+            type="com.atme.mineklass.classData.ClassData" />
     </data>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_margin="8dp"
         tools:context=".classDetails.ClassDetailFragment">
 
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/class_type_desc"
+            app:setClassImage="@{classData.class_type}"
+            tools:src="@drawable/tutor" />
 
         <TextView
-            android:id="@+id/detailLecturer"
+            android:id="@+id/classType"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="@{viewModel.classLecturer}"
-            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            android:layout_margin="16dp"
+            android:fontFamily="@font/amiko_semibold"
+            android:gravity="center"
+            android:text="@{classData.class_type}"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+            tools:text="Lecture" />
 
-            tools:text="Good teacher" />
-
-        <TextView
-            android:id="@+id/detailsSubject"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="@{viewModel.classSubject}"
-            tools:text="Good subject" />
-
-        <TextView
-            android:id="@+id/detailsClassType"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="@{viewModel.moduleType}"
-            tools:text="Lecture"
-            />
-        <TextView
-            android:id="@+id/detailsModuleCode"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="@{viewModel.moduleCode}"
-            tools:text="CS-42069"
-            />
-        <!-- TEST replace id with class name -->
-        <TextView
-            android:id="@+id/classId"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="@{viewModel.id}"
-            tools:text="C11-0"
-            />
+            android:layout_margin="16dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/classTime"
+                style="@style/classTextStyle"
+                android:text="@{@string/class_time(classData.time)}"
+                tools:text="Time: 10:00 - 11:00" />
+
+            <TextView
+                android:id="@+id/className"
+                style="@style/classTextStyle"
+                android:text="@{@string/class_name(classData.module_title)}"
+                tools:text="Class: Databases" />
+
+            <TextView
+                android:id="@+id/classTeacher"
+                style="@style/classTextStyle"
+                android:text="@{@string/class_teacher(classData.lecturer)}"
+                tools:text="Teacher: Mr. Tim Person" />
+
+            <TextView
+                android:id="@+id/classDay"
+                style="@style/classTextStyle"
+                android:text="@{@string/class_day(classData.day)}"
+                tools:text="Day: Tue" />
+
+            <TextView
+                android:id="@+id/classRoom"
+                style="@style/classTextStyle"
+                android:text="@{@string/class_room(classData.room)}"
+                app:setClassTextVisibility="@{classData.room}"
+                tools:text="Room: LT05" />
+
+            <TextView
+                android:id="@+id/classBlock"
+                style="@style/classTextStyle"
+                android:text="@{@string/class_block(classData.block)}"
+                app:setClassTextVisibility="@{classData.block}"
+                tools:text="Block: Japan" />
+
+        </LinearLayout>
 
     </LinearLayout>
 </layout>

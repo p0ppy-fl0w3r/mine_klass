@@ -2,6 +2,7 @@ package com.atme.mineklass.utils
 
 import android.graphics.Color
 import android.view.View
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.databinding.BindingAdapter
@@ -46,5 +47,26 @@ fun isVisible(textView: TextView, value: String){
     else{
         textView.visibility = View.VISIBLE
     }
+}
+
+@BindingAdapter("setClassImage")
+fun setClassImage(imageView: ImageView, classType: String){
+    // TODO change to regex comparison
+    val mImageRes = when(classType){
+        "Lecture" -> R.drawable.lecture
+        "Workshop" -> R.drawable.lab
+        else -> R.drawable.tutor
+    }
+
+    imageView.setImageResource(mImageRes)
+}
+
+@BindingAdapter("setClassTextVisibility")
+fun setClassTextVisibility(textView: TextView, value : String){
+    val visibility = when(value){
+        "" -> View.GONE
+        else -> View.VISIBLE
+    }
+    textView.visibility = visibility
 }
 

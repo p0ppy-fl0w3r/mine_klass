@@ -85,6 +85,7 @@ class SettingsFragment : Fragment() {
                 if (inputStream != null) {
                     try {
                         val bufferedReader = inputStream.bufferedReader()
+                        // The program will throw an exception if the json file is formatted.
                         val jsonString = bufferedReader.use { it.readLine() }
 
                         val classData =

@@ -7,9 +7,9 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
 
-
+// TEST
 private const val BASE_URL = "https://jsonkeeper.com/b/"
-private const val BIN_ID = "DJIC"
+private const val BIN_ID = "SHRA"
 
 
 private val moshi: Moshi = Moshi.Builder()

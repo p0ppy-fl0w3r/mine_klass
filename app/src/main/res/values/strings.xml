@@ -12,9 +12,7 @@
     <string name="splash_image">Splash Image.</string>
     <string name="navigation_drawer_button">Navigation drawer button</string>
     <string name="class_view_separator">Class view separator</string>
-    <string name="about_desc_text">Scheduler application for Islington College.</string>
-    <string name="code_by">Code by: Aabishkar Khanal</string>
-    <string name="deesign_by">Design by: Satish Shrestha</string>
+    <string name="about_desc_text">Scheduler application for Islington College that will tell you how long you\'ve got till your next class.</string>
     <string name="time_remaining">Time remaining for next class: %1$s</string>
     <string name="no_class_today">No classes for today!!</string>
     <string name="save">Save</string>
@@ -24,4 +22,11 @@
     <string name="pref_data">got_data_from_internet</string>
     <string name="read_from_json">Read data from a json file</string>
     <string name="read">Read</string>
+    <string name="class_type_desc">Picture showing class type.</string>
+    <string name="class_time">Time: %s</string>
+    <string name="class_name">Class: %s</string>
+    <string name="class_teacher">Teacher: %s</string>
+    <string name="class_day">Day: %s</string>
+    <string name="class_room">Room: %s</string>
+    <string name="class_block">Block: %s</string>
 </resources>
