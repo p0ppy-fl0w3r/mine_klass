@@ -10,5 +10,6 @@
     <color name="primaryTextColor">#ffffff</color>
     <color name="secondaryTextColor">#ffffff</color>
     <color name="color_white">#FFFFFF</color>
+    <color name="primaryTransparent">#BBC22424</color>
 
 </resources>

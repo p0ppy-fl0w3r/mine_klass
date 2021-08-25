@@ -26,7 +26,7 @@ class SettingsViewModel(application: Application) : AndroidViewModel(application
     fun refreshClassData() {
         viewModelScope.launch {
 
-            // TODO improve network features.
+            // If it ain't broke don't fix it!
             try {
                 repository.deleteAll()
                 repository.updateDatabase()

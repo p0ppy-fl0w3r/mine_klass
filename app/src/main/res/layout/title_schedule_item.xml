@@ -4,91 +4,73 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="classData"
             type="com.atme.mineklass.database.UserClassData" />
     </data>
 
-
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/titleConstraintLayout"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/card_rect"
+        android:orientation="vertical"
         android:layout_marginBottom="12dp"
-        tools:background="@color/primaryColor">
+        android:padding="10dp">
 
         <TextView
             android:id="@+id/titleTimeText"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@{classData.time}"
             android:textAppearance="@style/TextAppearance.AppCompat.Body2"
             android:textColor="#FFFFFFFF"
-            android:text="@{classData.time}"
             app:isVisible="@{classData.time}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
             tools:text="10:00 AM - 11:00 AM" />
 
         <TextView
             android:id="@+id/titleSubjectText"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@{classData.module_title}"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textColor="#FFFFFFFF"
-            android:text="@{classData.module_title}"
             app:isVisible="@{classData.module_title}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/titleTimeText"
             tools:text="Software Engineering" />
 
         <TextView
             android:id="@+id/titleRoomText"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/default_bottom_padding"
             android:text="@{classData.room}"
-            app:isVisible="@{classData.room}"
             android:textAppearance="@style/TextAppearance.AppCompat.Body2"
             android:textColor="#FFFFFFFF"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/titleSubjectText"
+            app:isVisible="@{classData.room}"
             tools:text="TR07" />
 
         <TextView
             android:id="@+id/titleBlockText"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/default_bottom_padding"
             android:text="@{classData.block}"
-            app:isVisible="@{classData.block}"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textColor="#FFFFFFFF"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/titleRoomText"
+            app:isVisible="@{classData.block}"
             tools:text="Nepal" />
 
         <TextView
             android:id="@+id/titleClassType"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/default_bottom_padding"
             android:text="@{classData.class_type}"
-            app:isVisible="@{classData.class_type}"
             android:textAppearance="@style/TextAppearance.AppCompat.Body2"
             android:textColor="#FFFFFFFF"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/titleBlockText"
-            app:layout_constraintVertical_bias="1.0"
+            app:isVisible="@{classData.class_type}"
             tools:text="Lecture" />
+    </LinearLayout>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

@@ -45,8 +45,6 @@ class TitleFragment : Fragment() {
 
         val adapter = TitleRecyclerAdapter()
         binding.titleRecycler.adapter = adapter
-        binding.titleCard.background =
-            ContextCompat.getDrawable(requireContext(), R.drawable.card_rect)
 
         val pref = requireActivity().getPreferences(Activity.MODE_PRIVATE)
 
@@ -72,8 +70,6 @@ class TitleFragment : Fragment() {
         })
 
         viewModel.currentClassIndex.observe(viewLifecycleOwner) {
-
-            Timber.e("Updated class index to $it")
 
             if (it >= viewModel.dayData.value?.size ?: 0) {
                 binding.timeRemaining.text = getString(R.string.no_class_today)
