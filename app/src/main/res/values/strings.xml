@@ -29,4 +29,8 @@
     <string name="class_day">Day: %s</string>
     <string name="class_room">Room: %s</string>
     <string name="class_block">Block: %s</string>
+    <string name="class_group">Group: %s</string>
+    <string name="class_moduleCode">Module Code: %s</string>
+
+    <string name="edit">Edit</string>
 </resources>

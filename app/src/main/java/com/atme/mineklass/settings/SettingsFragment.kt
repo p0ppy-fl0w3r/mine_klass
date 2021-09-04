@@ -1,30 +1,39 @@
 package com.atme.mineklass.settings
 
 import android.app.Activity
-import android.app.Instrumentation
-import android.content.ContentResolver
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.net.toFile
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.atme.mineklass.databinding.FragmentSettingsBinding
-import com.atme.mineklass.utils.JsonUtils
 import com.atme.mineklass.utils.JsonUtils.getClassFromJson
-import com.squareup.moshi.Moshi
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import timber.log.Timber
-import java.io.InputStream
 import java.lang.Exception
 
-
+// TODO add progress dialogs.
 class SettingsFragment : Fragment() {
 
     private val viewModel: SettingsViewModel by lazy { ViewModelProvider(this).get(SettingsViewModel::class.java) }
+
+    private val resultLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+            if (it.resultCode == Activity.RESULT_OK) {
+                it.data?.data.let { mUri ->
+                    if (mUri != null) {
+                        getFromJson(mUri)
+                    }
+                }
+            }
+        }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,24 +42,30 @@ class SettingsFragment : Fragment() {
 
         val binding = FragmentSettingsBinding.inflate(inflater, container, false)
 
-
-
         viewModel.refreshClassData.observe(viewLifecycleOwner, {
             if (it == true) {
-                viewModel.refreshClassData()
-                viewModel.doneRefresh()
+
                 Toast.makeText(context, "Database updated!", Toast.LENGTH_SHORT).show()
+            } else if (it == false) {
+                Toast.makeText(
+                    context,
+                    "Something went wrong. Please check your internet!",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
+
+            viewModel.doneRefresh()
         })
 
-        viewModel.insertFromJson.observe(viewLifecycleOwner){
-            if(it == true){
+        viewModel.insertFromJson.observe(viewLifecycleOwner) {
+            if (it == true) {
+                viewModel.doneInsert()
                 Toast.makeText(context, "Added class from file.", Toast.LENGTH_SHORT).show()
             }
         }
 
         binding.refreshButton.setOnClickListener {
-            viewModel.startRefresh()
+            viewModel.refreshClassData()
         }
 
         binding.changeButton.setOnClickListener {
@@ -71,43 +86,39 @@ class SettingsFragment : Fragment() {
             flags = Intent.FLAG_GRANT_READ_URI_PERMISSION
 
         }
-
-        startActivityForResult(intent, 0)
+        resultLauncher.launch(intent)
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
+    private fun getFromJson(uri: Uri) {
 
-        if (requestCode == 0) {
-            if (resultCode == Activity.RESULT_OK) {
-                val url = data?.data!!
-                val inputStream = requireContext().contentResolver.openInputStream(url)
-                if (inputStream != null) {
-                    try {
-                        val bufferedReader = inputStream.bufferedReader()
-                        // The program will throw an exception if the json file is formatted.
-                        val jsonString = bufferedReader.use { it.readLine() }
+        lifecycleScope.launch(Dispatchers.IO) {
+            val inputStream = requireContext().contentResolver.openInputStream(uri)
+            if (inputStream != null) {
+                try {
+                    val bufferedReader = inputStream.bufferedReader()
+                    // The program will throw an exception if the json file is formatted.
+                    val jsonString = bufferedReader.use { it.readLine() }
 
-                        val classData =
-                            getClassFromJson(jsonString)
+                    val classData =
+                        getClassFromJson(jsonString)
 
-                        if (classData != null) {
-                            viewModel.insertFromJson(classData)
-                            viewModel.startInsert()
-                        }
-
-                    } catch (e: Exception) {
-                        Toast.makeText(
-                            requireContext(),
-                            "Something went wrong reading the file!",
-                            Toast.LENGTH_SHORT
-                        ).show()
-
-                        Timber.e("File reading failed: ${e.message}")
+                    if (classData != null) {
+                        viewModel.insertFromJson(classData)
                     }
+
+                } catch (e: Exception) {
+                    Toast.makeText(
+                        requireContext(),
+                        "Something went wrong reading the file!",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    viewModel.doneInsert()
+
+                    Timber.e("File reading failed: ${e.message}")
                 }
             }
         }
-
     }
+
 }
+

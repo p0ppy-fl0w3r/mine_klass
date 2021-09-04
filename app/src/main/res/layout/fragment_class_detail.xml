@@ -79,7 +79,29 @@
                 app:setClassTextVisibility="@{classData.block}"
                 tools:text="Block: Japan" />
 
+            <TextView
+                android:id="@+id/classGroup"
+                style="@style/classTextStyle"
+                android:text="@{@string/class_group(classData.group)}"
+                app:setClassTextVisibility="@{classData.group}"
+                tools:text="Group: C11 + C12" />
+
+            <TextView
+                android:id="@+id/classModuleCode"
+                style="@style/classTextStyle"
+                android:text="@{@string/class_moduleCode(classData.module_name)}"
+                app:setClassTextVisibility="@{classData.module_name}"
+                tools:text="Module Code: CS42069" />
+
         </LinearLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/amiko_semibold"
+            android:text="@string/edit"
+            android:textAllCaps="false"/>
 
     </LinearLayout>
 </layout>

@@ -9,7 +9,6 @@ import com.atme.mineklass.repository.ClassRepository
 import kotlinx.coroutines.launch
 import com.atme.mineklass.classData.ClassData
 
-
 class SettingsViewModel(application: Application) : AndroidViewModel(application) {
 
     private var _refreshClassData = MutableLiveData<Boolean?>()
@@ -23,40 +22,32 @@ class SettingsViewModel(application: Application) : AndroidViewModel(application
     private val database = UserClassDatabase.getInstance(getApplication())
     private val repository = ClassRepository(database)
 
+
     fun refreshClassData() {
         viewModelScope.launch {
-
-            // If it ain't broke don't fix it!
+            _refreshClassData.value = true
             try {
                 repository.deleteAll()
                 repository.updateDatabase()
-            } catch (e: retrofit2.HttpException) {
-                Toast.makeText(getApplication(), "${e.message}", Toast.LENGTH_SHORT).show()
+            } catch (e: Exception) {
+                _refreshClassData.value = false
             }
         }
     }
 
     fun insertFromJson(classData: List<ClassData>) {
         viewModelScope.launch {
+            _insertFromJson.value = true
             repository.deleteAll()
             repository.insertAll(classData)
-            doneInsert()
         }
-    }
-
-    fun startRefresh() {
-        _refreshClassData.value = true
     }
 
     fun doneRefresh() {
         _refreshClassData.value = null
     }
 
-    fun startInsert() {
-        _insertFromJson.value = true
-    }
-
-    private fun doneInsert() {
+    fun doneInsert() {
         _insertFromJson.value = null
     }
 
