@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.atme.mineklass.databinding.FragmentClassDetailBinding
 
 
@@ -20,6 +21,11 @@ class ClassDetailFragment : Fragment() {
         val selectedClass = ClassDetailFragmentArgs.fromBundle(requireArguments()).classDataArg
 
         binding.classData = selectedClass
+
+        binding.editClassDetail.setOnClickListener {
+            findNavController().navigate(ClassDetailFragmentDirections.detailsToEdit(selectedClass))
+        }
+
         // Inflate the layout for this fragment
         return binding.root
     }

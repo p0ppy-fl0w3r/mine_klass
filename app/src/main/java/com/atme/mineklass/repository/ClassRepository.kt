@@ -27,6 +27,10 @@ class ClassRepository(private val database: UserClassDatabase) {
         }
     }
 
+    suspend fun insertClass(classData: ClassData){
+        database.scheduleDao.insertClass(classData.toUserClassData())
+    }
+
     suspend fun updateDatabase() {
         val classNetworkData =
             ClassNetworkApi.classNetworkApi.getClassData().asUserClassData()
@@ -43,6 +47,14 @@ class ClassRepository(private val database: UserClassDatabase) {
         val mUserClassData = classData.asUserClassData()
 
         database.scheduleDao.insertAll(mUserClassData)
+    }
+
+    suspend fun getItemCount(): Int{
+        return database.scheduleDao.getItemCount()
+    }
+
+    suspend fun getClass(id: String) : ClassData{
+        return database.scheduleDao.getSchedule(id).asClassData()
     }
 
     suspend fun deleteAll(){

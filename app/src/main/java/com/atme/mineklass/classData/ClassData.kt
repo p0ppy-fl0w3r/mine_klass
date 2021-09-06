@@ -13,18 +13,18 @@ private val ALL_DAYS =
 @Parcelize
 data class ClassData(
     // Setting all properties to an empty string to prevent errors
-    @Json(name = "Day") val day: String = "",
-    @Json(name = "Time") val time: String = "",
-    @Json(name = "Class Type") val class_type: String = "",
-    @Json(name = "Module Code") val module_name: String = "",
-    @Json(name = "Module Title ") val module_title: String = "",
-    @Json(name = "Lecturer") val lecturer: String = "",
-    @Json(name = "Group") val group: String = "",
-    @Json(name = "Block") val block: String = "",
-    @Json(name = "Room") val room: String = "",
-    @Json(name = "id") val id: String
+    @Json(name = "Day") var day: String = "",
+    @Json(name = "Time") var time: String = "",
+    @Json(name = "Class Type") var class_type: String = "",
+    @Json(name = "Module Code") var module_name: String = "",
+    @Json(name = "Module Title ") var module_title: String = "",
+    @Json(name = "Lecturer") var lecturer: String = "",
+    @Json(name = "Group") var group: String = "",
+    @Json(name = "Block") var block: String = "",
+    @Json(name = "Room") var room: String = "",
+    @Json(name = "id") var id: String
 ) : Parcelable {
-    val isToday = ALL_DAYS[day] == Date().day
+    var isToday = ALL_DAYS[day] == Date().day
 
     fun toUserClassData(): UserClassData {
         return UserClassData(

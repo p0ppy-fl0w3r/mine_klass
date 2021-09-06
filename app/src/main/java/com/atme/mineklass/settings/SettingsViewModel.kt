@@ -8,6 +8,7 @@ import com.atme.mineklass.database.UserClassDatabase
 import com.atme.mineklass.repository.ClassRepository
 import kotlinx.coroutines.launch
 import com.atme.mineklass.classData.ClassData
+import timber.log.Timber
 
 class SettingsViewModel(application: Application) : AndroidViewModel(application) {
 

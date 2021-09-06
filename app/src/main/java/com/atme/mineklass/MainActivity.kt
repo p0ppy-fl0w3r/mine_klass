@@ -13,8 +13,6 @@ import com.atme.mineklass.databinding.ActivityMainBinding
 import kotlinx.android.synthetic.main.activity_main.*
 
 
-// TODO create as splash screen
-
 class MainActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityMainBinding

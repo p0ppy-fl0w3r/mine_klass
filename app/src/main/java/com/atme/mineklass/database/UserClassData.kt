@@ -6,16 +6,16 @@ import com.atme.mineklass.classData.ClassData
 
 @Entity(tableName = "schedule_table")
 data class UserClassData(
-    @PrimaryKey val id:String,
-    val day: String,
-    val time: String,
-    val class_type: String,
-    val module_name: String,
-    val module_title: String,
-    val lecturer: String,
-    val group: String,
-    val block: String,
-    val room: String,
+    @PrimaryKey var id:String,
+    var day: String,
+    var time: String,
+    var class_type: String,
+    var module_name: String,
+    var module_title: String,
+    var lecturer: String,
+    var group: String,
+    var block: String,
+    var room: String,
 )
 
 fun List<UserClassData>.asClassData(): List<ClassData> {
@@ -33,4 +33,20 @@ fun List<UserClassData>.asClassData(): List<ClassData> {
             room = it.room
         )
     }
+}
+
+fun UserClassData.asClassData(): ClassData {
+    return ClassData(
+        id = id,
+        day = day,
+        time = time,
+        class_type = class_type,
+        module_name = module_name,
+        module_title = module_title,
+        lecturer = lecturer,
+        group = group,
+        block = block,
+        room = room
+    )
+
 }

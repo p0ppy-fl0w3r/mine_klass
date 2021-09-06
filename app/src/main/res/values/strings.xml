@@ -33,4 +33,36 @@
     <string name="class_moduleCode">Module Code: %s</string>
 
     <string name="edit">Edit</string>
+    <string name="start_time">Start Time</string>
+    <string name="end_time">End Time</string>
+    <string name="edit_class_label">Class:</string>
+    <string name="class_name_hint">Class name…</string>
+    <string name="teacher_label">Teacher:</string>
+    <string name="subject_teacher_hint">Subject teacher…</string>
+    <string name="day_label">Day:</string>
+    <string name="room_label">Room:</string>
+    <string name="class_room_hint">Class Room…</string>
+    <string name="block_label">Block:</string>
+    <string name="class_block_hint">Class Block…</string>
+    <string name="group_label">Group:</string>
+    <string name="group_hint">Group…</string>
+    <string name="module_code_hint">Module Code…</string>
+    <string name="module_code_label">Module code:</string>
+    <string name="class_type_label">Class Type:</string>
+
+    <string-array name="days_array">
+        <item>SUN</item>
+        <item>MON</item>
+        <item>TUE</item>
+        <item>WED</item>
+        <item>THU</item>
+        <item>FRI</item>
+        <item>SAT</item>
+    </string-array>
+
+    <string-array name="class_type_array">
+        <item>Workshop</item>
+        <item>Lecture</item>
+        <item>Discussion</item>
+    </string-array>
 </resources>

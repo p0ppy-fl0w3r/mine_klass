@@ -8,4 +8,34 @@
         <item name="android:textAppearance">@style/TextAppearance.AppCompat.Body1</item>
         <item name="android:fontFamily">@font/amiko_semibold</item>
     </style>
+
+    <style name="editLabelStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textAppearance">@style/TextAppearance.MaterialComponents.Headline6
+        </item>
+        <item name="android:layout_marginStart">10dp</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:textColor">@color/color_white</item>
+        <item name="android:fontFamily">@font/amiko_semibold</item>
+    </style>
+
+    <style name="editContainerStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginBottom">2.5dp</item>
+        <item name="android:layout_marginTop">2.5dp</item>
+        <item name="android:background">@drawable/edit_card_rect</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="editClassInputStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:layout_marginStart">4dp</item>
+        <item name="android:fontFamily">@font/amiko_semibold</item>
+        <item name="android:layout_marginEnd">6dp</item>
+        <item name="android:importantForAutofill">no</item>
+        <item name="android:inputType">text</item>
+    </style>
 </resources>

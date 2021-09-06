@@ -51,7 +51,6 @@ fun isVisible(textView: TextView, value: String){
 
 @BindingAdapter("setClassImage")
 fun setClassImage(imageView: ImageView, classType: String){
-    // TODO change to regex comparison
     val mImageRes = when(classType){
         "Lecture" -> R.drawable.lecture
         "Workshop" -> R.drawable.lab

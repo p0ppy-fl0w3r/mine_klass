@@ -20,6 +20,7 @@ import timber.log.Timber
 import java.lang.Exception
 
 // TODO add progress dialogs.
+// TODO show notifications when class is about to start.
 class SettingsFragment : Fragment() {
 
     private val viewModel: SettingsViewModel by lazy { ViewModelProvider(this).get(SettingsViewModel::class.java) }
@@ -41,6 +42,7 @@ class SettingsFragment : Fragment() {
     ): View {
 
         val binding = FragmentSettingsBinding.inflate(inflater, container, false)
+
 
         viewModel.refreshClassData.observe(viewLifecycleOwner, {
             if (it == true) {

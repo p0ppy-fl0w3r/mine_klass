@@ -9,7 +9,6 @@ import com.atme.mineklass.repository.ClassRepository
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
-// TODO change stuff
 class ScheduleViewModel(application: Application) : AndroidViewModel(application) {
 
     private val database = UserClassDatabase.getInstance(application)

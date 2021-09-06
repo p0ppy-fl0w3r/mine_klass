@@ -9,7 +9,7 @@
         android:id="@+id/titleFragment"
         android:name="com.atme.mineklass.homePage.TitleFragment"
         android:label="Home"
-        tools:layout="@layout/fragment_title"/>
+        tools:layout="@layout/fragment_title" />
     <fragment
         android:id="@+id/aboutFragment"
         android:name="com.atme.mineklass.about.AboutFragment"
@@ -37,5 +37,21 @@
         <argument
             android:name="classDataArg"
             app:argType="com.atme.mineklass.classData.ClassData" />
+        <action
+            android:id="@+id/details_to_edit"
+            app:destination="@id/editClassDetail" />
+    </fragment>
+    <fragment
+        android:id="@+id/editClassDetail"
+        android:name="com.atme.mineklass.classDetails.editClassDetails.EditClassDetail"
+        android:label="Edit Class"
+        tools:layout="@layout/edit_class_detail_fragment">
+    <argument
+        android:name="classData"
+        app:argType="com.atme.mineklass.classData.ClassData" />
+        <action
+            android:id="@+id/edit_to_detail"
+            app:destination="@id/classDetailFragment"
+            app:popUpTo="@id/scheduleFragment" />
     </fragment>
 </navigation>

@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            tools:context=".classDetails.editClassDetails.EditClassDetail">
+
+            <LinearLayout style="@style/editContainerStyle">
+
+                <TextView
+                    style="@style/editLabelStyle"
+                    android:text="@string/start_time" />
+
+                <TimePicker
+                    android:id="@+id/fromTime"
+                    android:layout_width="match_parent"
+                    android:layout_height="130dp"
+                    android:timePickerMode="spinner" />
+
+            </LinearLayout>
+
+            <LinearLayout style="@style/editContainerStyle">
+
+                <TextView
+                    style="@style/editLabelStyle"
+                    android:text="@string/end_time" />
+
+                <TimePicker
+                    android:id="@+id/toTime"
+                    android:layout_width="match_parent"
+                    android:layout_height="130dp"
+                    android:timePickerMode="spinner" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/editContainerStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/editLabelStyle"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="10dp"
+                    android:text="@string/edit_class_label" />
+
+                <EditText
+                    android:id="@+id/className"
+                    style="@style/editClassInputStyle"
+                    android:hint="@string/class_name_hint"
+                    android:importantForAutofill="no" />
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/editContainerStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/editLabelStyle"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="10dp"
+                    android:text="@string/class_type_label" />
+
+                <Spinner
+                    android:id="@+id/classType"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="10dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/editContainerStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/editLabelStyle"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="10dp"
+                    android:text="@string/teacher_label" />
+
+                <EditText
+                    android:id="@+id/teacherName"
+                    style="@style/editClassInputStyle"
+                    android:hint="@string/subject_teacher_hint"
+                    android:importantForAutofill="no" />
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/editContainerStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/editLabelStyle"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="10dp"
+                    android:text="@string/day_label" />
+
+                <Spinner
+                    android:id="@+id/daySpinner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="10dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/editContainerStyle"
+                android:layout_width="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/editLabelStyle"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="10dp"
+                    android:text="@string/room_label" />
+
+                <EditText
+                    android:id="@+id/classRoom"
+                    style="@style/editClassInputStyle"
+                    android:hint="@string/class_room_hint"
+                    android:importantForAutofill="no" />
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/editContainerStyle"
+                android:layout_width="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/editLabelStyle"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="10dp"
+                    android:text="@string/block_label" />
+
+                <EditText
+                    android:id="@+id/classBlock"
+                    style="@style/editClassInputStyle"
+                    android:hint="@string/class_block_hint"
+                    android:importantForAutofill="no" />
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/editContainerStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/editLabelStyle"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="10dp"
+                    android:text="@string/group_label" />
+
+                <EditText
+                    android:id="@+id/classGroup"
+                    style="@style/editClassInputStyle"
+                    android:hint="@string/group_hint"
+                    android:importantForAutofill="no" />
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/editContainerStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/editLabelStyle"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="10dp"
+                    android:text="@string/module_code_label" />
+
+                <EditText
+                    android:id="@+id/moduleCode"
+                    style="@style/editClassInputStyle"
+                    android:hint="@string/module_code_hint"
+                    android:importantForAutofill="no" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/saveButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="12dp"
+                android:fontFamily="@font/amiko_semibold"
+                android:text="@string/save"
+                android:textAllCaps="false" />
+
+        </LinearLayout>
+    </ScrollView>
+</layout>

@@ -12,6 +12,9 @@ interface UserClassDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(allData: List<UserClassData>)
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertClass(classData: UserClassData)
+
     @Query("SELECT * FROM schedule_table")
     fun selectAll(): LiveData<List<UserClassData>>
 
