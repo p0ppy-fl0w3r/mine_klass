@@ -8,6 +8,7 @@ import com.atme.mineklass.database.UserClassDatabase
 import com.atme.mineklass.repository.ClassRepository
 import kotlinx.coroutines.launch
 import com.atme.mineklass.classData.ClassData
+import kotlinx.coroutines.Dispatchers
 import timber.log.Timber
 
 class SettingsViewModel(application: Application) : AndroidViewModel(application) {
@@ -25,13 +26,14 @@ class SettingsViewModel(application: Application) : AndroidViewModel(application
 
 
     fun refreshClassData() {
-        viewModelScope.launch {
-            _refreshClassData.value = true
+        viewModelScope.launch(Dispatchers.IO) {
             try {
                 repository.deleteAll()
                 repository.updateDatabase()
+                _refreshClassData.postValue(true)
             } catch (e: Exception) {
-                _refreshClassData.value = false
+                Timber.e("Could not refresh data ${e.message}")
+                _refreshClassData.postValue(false)
             }
         }
     }

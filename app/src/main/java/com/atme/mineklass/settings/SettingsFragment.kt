@@ -45,18 +45,21 @@ class SettingsFragment : Fragment() {
 
 
         viewModel.refreshClassData.observe(viewLifecycleOwner, {
+            Timber.e("The state has changed to $it")
             if (it == true) {
 
                 Toast.makeText(context, "Database updated!", Toast.LENGTH_SHORT).show()
+                // Calling doneRefresh from outside the if block will cause the observer to go on an infinite loop
+                viewModel.doneRefresh()
             } else if (it == false) {
                 Toast.makeText(
                     context,
                     "Something went wrong. Please check your internet!",
                     Toast.LENGTH_SHORT
                 ).show()
+                viewModel.doneRefresh()
             }
 
-            viewModel.doneRefresh()
         })
 
         viewModel.insertFromJson.observe(viewLifecycleOwner) {

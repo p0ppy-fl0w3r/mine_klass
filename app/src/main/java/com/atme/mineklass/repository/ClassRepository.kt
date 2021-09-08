@@ -10,6 +10,7 @@ import com.atme.mineklass.database.asClassData
 import com.atme.mineklass.network.ClassNetworkApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import timber.log.Timber
 
 
 class ClassRepository(private val database: UserClassDatabase) {
@@ -17,15 +18,6 @@ class ClassRepository(private val database: UserClassDatabase) {
         Transformations.map(database.scheduleDao.selectAll()) {
             it.asClassData()
         }
-
-    suspend fun reloadSchedule() {
-        withContext(Dispatchers.IO) {
-            val totalCount = database.scheduleDao.getItemCount()
-            if (totalCount <= 0) {
-                updateDatabase()
-            }
-        }
-    }
 
     suspend fun insertClass(classData: ClassData){
         database.scheduleDao.insertClass(classData.toUserClassData())
