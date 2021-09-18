@@ -49,6 +49,7 @@
     <string name="module_code_hint">Module Code…</string>
     <string name="module_code_label">Module code:</string>
     <string name="class_type_label">Class Type:</string>
+    <string name="add_class">Add Class</string>
 
     <string-array name="days_array">
         <item>SUN</item>

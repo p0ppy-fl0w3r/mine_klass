@@ -23,7 +23,7 @@ class ClassDetailFragment : Fragment() {
         binding.classData = selectedClass
 
         binding.editClassDetail.setOnClickListener {
-            findNavController().navigate(ClassDetailFragmentDirections.detailsToEdit(selectedClass))
+            findNavController().navigate(ClassDetailFragmentDirections.detailsToEdit(selectedClass.id.toString()))
         }
 
         // Inflate the layout for this fragment

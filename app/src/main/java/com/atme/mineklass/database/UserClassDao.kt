@@ -19,7 +19,7 @@ interface UserClassDao {
     fun selectAll(): LiveData<List<UserClassData>>
 
     @Query("SELECT * FROM schedule_table WHERE id=:id")
-    suspend fun getSchedule(id: String):UserClassData
+    suspend fun getSchedule(id: Int):UserClassData
 
     @Query("SELECT * FROM schedule_table WHERE day=:day")
     suspend fun getDaySchedule(day: String):List<UserClassData>
@@ -29,5 +29,8 @@ interface UserClassDao {
 
     @Query("DELETE FROM schedule_table")
     suspend fun deleteAll()
+
+    @Query("SELECT id FROM schedule_table ORDER BY ID DESC LIMIT 1")
+    suspend fun getLastId(): Int?
 
 }

@@ -25,4 +25,7 @@ object Constants {
         "Lecture",
         "Discussion"
     )
+
+    // Add class default id
+    const val ID_EDIT = "Edit"
 }

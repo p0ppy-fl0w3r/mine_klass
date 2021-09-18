@@ -5,7 +5,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-@Database(entities = [UserClassData::class], version = 1, exportSchema = false)
+@Database(entities = [UserClassData::class], version = 2, exportSchema = false)
 abstract class UserClassDatabase : RoomDatabase() {
     abstract val scheduleDao: UserClassDao
 

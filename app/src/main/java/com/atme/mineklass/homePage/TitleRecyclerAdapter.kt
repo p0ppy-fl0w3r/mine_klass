@@ -154,7 +154,7 @@ sealed class DataItem {
     abstract val id: String
 
     data class UserClassDataItem(val userClassData: UserClassData) : DataItem() {
-        override val id: String = userClassData.id
+        override val id: String = userClassData.id.toString()
     }
 
     data class Header(val day: String) : DataItem() {

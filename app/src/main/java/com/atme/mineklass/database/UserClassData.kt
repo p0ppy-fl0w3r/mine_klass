@@ -6,7 +6,7 @@ import com.atme.mineklass.classData.ClassData
 
 @Entity(tableName = "schedule_table")
 data class UserClassData(
-    @PrimaryKey var id:String,
+    @PrimaryKey var id:Int,
     var day: String,
     var time: String,
     var class_type: String,

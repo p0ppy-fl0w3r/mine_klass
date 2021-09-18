@@ -5,16 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.atme.mineklass.Constants
 import com.atme.mineklass.R
-import com.atme.mineklass.classData.ClassData
 import com.atme.mineklass.databinding.FragmentScheduleBinding
-import timber.log.Timber
-import java.time.LocalDate
-import java.util.*
 
 
 class ScheduleFragment : Fragment() {
@@ -22,7 +18,7 @@ class ScheduleFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         val binding = DataBindingUtil.inflate<FragmentScheduleBinding>(
             inflater,
@@ -40,9 +36,10 @@ class ScheduleFragment : Fragment() {
             viewModel.navigateToClassDetail(it)
         })
 
-        viewModel.classLiveData.observe(viewLifecycleOwner, {
-            it?.let {
-                adapter.submitList(it)
+        viewModel.classLiveData.observe(viewLifecycleOwner, { classList ->
+            classList?.let { nClassList ->
+                val sortedList = nClassList.sortedBy { it.getValue() }
+                adapter.submitList(sortedList)
             }
         })
 
@@ -54,6 +51,11 @@ class ScheduleFragment : Fragment() {
         })
 
         recycler.adapter = adapter
+
+        binding.addClassFab.setOnClickListener{
+            findNavController().navigate(ScheduleFragmentDirections.scheduleToNew(Constants.ID_EDIT))
+        }
+
         // Inflate the layout for this fragment
         return binding.root
     }

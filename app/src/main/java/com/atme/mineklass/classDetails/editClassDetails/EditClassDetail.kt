@@ -15,9 +15,9 @@ import com.atme.mineklass.classData.ClassData
 import com.atme.mineklass.databinding.EditClassDetailFragmentBinding
 import com.atme.mineklass.utils.getTime
 import com.atme.mineklass.utils.getTimeString
+import timber.log.Timber
 
 // TODO add validation
-// FIXME edited classData move to the last in scheduleFragment's recyclerView
 class EditClassDetail : Fragment() {
 
     private lateinit var binding: EditClassDetailFragmentBinding
@@ -37,7 +37,7 @@ class EditClassDetail : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        val selectedClass = EditClassDetailArgs.fromBundle(requireArguments()).classData
+        val selectedClassId = EditClassDetailArgs.fromBundle(requireArguments()).id
 
         binding =
             DataBindingUtil.inflate(inflater, R.layout.edit_class_detail_fragment, container, false)
@@ -57,20 +57,42 @@ class EditClassDetail : Fragment() {
             val moduleCode = binding.moduleCode.text.toString()
             val classType = binding.classType.selectedItem.toString()
 
-            newClassData = ClassData(
-                id = selectedClass.id,
-                day = day,
-                time = classTime,
-                class_type = classType,
-                module_name = moduleCode,
-                module_title = className,
-                lecturer = teacher,
-                group = group,
-                block = block,
-                room = room
-            )
+            if (selectedClassId != Constants.ID_EDIT) {
+                newClassData = ClassData(
+                    id = selectedClassId.toInt(),
+                    day = day,
+                    time = classTime,
+                    class_type = classType,
+                    module_name = moduleCode,
+                    module_title = className,
+                    lecturer = teacher,
+                    group = group,
+                    block = block,
+                    room = room
+                )
+            }
+            else{
+                newClassData = ClassData(
+                    id = -1,
+                    day = day,
+                    time = classTime,
+                    class_type = classType,
+                    module_name = moduleCode,
+                    module_title = className,
+                    lecturer = teacher,
+                    group = group,
+                    block = block,
+                    room = room
+                )
+            }
 
-            viewModel.saveClass(newClassData)
+            if (selectedClassId != Constants.ID_EDIT) {
+                Timber.e("Edit class called")
+                viewModel.saveClass(newClassData)
+            } else {
+                Timber.e("Save class called")
+                viewModel.addNewClass(newClassData)
+            }
         }
 
         binding.fromTime.setOnTimeChangedListener { _, hourOfDay, minute ->
@@ -87,6 +109,12 @@ class EditClassDetail : Fragment() {
             if (it == true) {
                 viewModel.doneInsert()
                 findNavController().navigate(EditClassDetailDirections.editToDetail(newClassData))
+            }
+        }
+
+        viewModel.currentClass.observe(viewLifecycleOwner) {
+            if (it != null) {
+                populateFields(it)
             }
         }
 
@@ -127,7 +155,10 @@ class EditClassDetail : Fragment() {
         }
 
         if (startHour == null) {
-            populateFields(selectedClass)
+            if (selectedClassId != Constants.ID_EDIT) {
+                viewModel.startPopulateFields(selectedClassId.toInt())
+            }
+
         }
 
         return binding.root

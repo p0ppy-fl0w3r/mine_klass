@@ -45,11 +45,15 @@ class ClassRepository(private val database: UserClassDatabase) {
         return database.scheduleDao.getItemCount()
     }
 
-    suspend fun getClass(id: String) : ClassData{
+    suspend fun getClass(id: Int) : ClassData{
         return database.scheduleDao.getSchedule(id).asClassData()
     }
 
     suspend fun deleteAll(){
         database.scheduleDao.deleteAll()
+    }
+
+    suspend fun getLastId():Int?{
+        return database.scheduleDao.getLastId()
     }
 }

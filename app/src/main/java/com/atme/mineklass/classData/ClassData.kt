@@ -2,6 +2,7 @@ package com.atme.mineklass.classData
 
 import android.os.Parcelable
 import com.atme.mineklass.database.UserClassData
+import com.atme.mineklass.utils.getTime
 import com.squareup.moshi.Json
 import kotlinx.android.parcel.Parcelize
 import java.util.*
@@ -22,15 +23,25 @@ data class ClassData(
     @Json(name = "Group") var group: String = "",
     @Json(name = "Block") var block: String = "",
     @Json(name = "Room") var room: String = "",
-    @Json(name = "id") var id: String
+    @Json(name = "id") var id: Int
 ) : Parcelable {
-    var isToday = ALL_DAYS[day] == Date().day
+    var isToday = ALL_DAYS[day] == Date().day //TODO Check out Calender.DAY_OF_THE_WEEK
 
     fun toUserClassData(): UserClassData {
         return UserClassData(
             id, day, time, class_type, module_name, module_title, lecturer, group, block, room
         )
     }
+
+    fun getValue():Float{
+        // TODO write doc string
+        val timeValue = getTime(time)[0].hour
+        val dayValue = ALL_DAYS[day]
+
+        return "$dayValue.$timeValue".toFloat()
+    }
+
+
 }
 
 fun List<ClassData>.asUserClassData(): List<UserClassData> {

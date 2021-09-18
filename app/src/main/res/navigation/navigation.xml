@@ -28,6 +28,9 @@
         <action
             android:id="@+id/action_navigate_to_details"
             app:destination="@id/classDetailFragment" />
+        <action
+            android:id="@+id/scheduleToNew"
+            app:destination="@id/editClassDetail" />
     </fragment>
     <fragment
         android:id="@+id/classDetailFragment"
@@ -44,14 +47,14 @@
     <fragment
         android:id="@+id/editClassDetail"
         android:name="com.atme.mineklass.classDetails.editClassDetails.EditClassDetail"
-        android:label="Edit Class"
+        android:label="Modify Class"
         tools:layout="@layout/edit_class_detail_fragment">
-    <argument
-        android:name="classData"
-        app:argType="com.atme.mineklass.classData.ClassData" />
         <action
             android:id="@+id/edit_to_detail"
             app:destination="@id/classDetailFragment"
             app:popUpTo="@id/scheduleFragment" />
+        <argument
+            android:name="id"
+            app:argType="string" />
     </fragment>
 </navigation>
