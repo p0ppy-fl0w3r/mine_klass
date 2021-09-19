@@ -28,4 +28,7 @@ object Constants {
 
     // Add class default id
     const val ID_EDIT = "Edit"
+
+    // Read storage permission request code
+    const val READ_REQUEST_CODE = 0
 }

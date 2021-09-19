@@ -58,6 +58,21 @@
             android:textAllCaps="false"
             android:layout_gravity="center"
             android:text="@string/read" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="4dp"
+            android:text="@string/delete_all_classes"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+        <Button
+            android:id="@+id/deleteButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/delete"
+            android:layout_gravity="center"
+            android:textAllCaps="false" />
     </LinearLayout>
 
 

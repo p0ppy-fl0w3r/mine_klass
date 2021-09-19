@@ -1,26 +1,29 @@
 package com.atme.mineklass.settings
 
+import android.Manifest
 import android.app.Activity
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.app.ActivityCompat
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import com.atme.mineklass.Constants
 import com.atme.mineklass.databinding.FragmentSettingsBinding
 import com.atme.mineklass.utils.JsonUtils.getClassFromJson
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import timber.log.Timber
-import java.lang.Exception
 
 // TODO add progress dialogs.
-// TODO show notifications when class is about to start.
+// TODO request permissions
 class SettingsFragment : Fragment() {
 
     private val viewModel: SettingsViewModel by lazy { ViewModelProvider(this).get(SettingsViewModel::class.java) }
@@ -81,6 +84,10 @@ class SettingsFragment : Fragment() {
             getFile()
         }
 
+        binding.deleteButton.setOnClickListener {
+            viewModel.deleteAll()
+        }
+
         return binding.root
     }
 
@@ -92,6 +99,36 @@ class SettingsFragment : Fragment() {
 
         }
         resultLauncher.launch(intent)
+    }
+
+    private fun requestReadPermission() {
+        if (ActivityCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.READ_EXTERNAL_STORAGE
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
+            getFile()
+        } else {
+            ActivityCompat.requestPermissions(
+                requireActivity(),
+                arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), Constants.READ_REQUEST_CODE
+            )
+        }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        if (requestCode == Constants.READ_REQUEST_CODE) {
+            if (grantResults.size == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                getFile()
+            } else {
+                Toast.makeText(requireContext(), "File read permission denied!", Toast.LENGTH_SHORT)
+                    .show()
+            }
+        }
     }
 
     private fun getFromJson(uri: Uri) {

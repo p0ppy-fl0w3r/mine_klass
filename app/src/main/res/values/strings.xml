@@ -50,6 +50,8 @@
     <string name="module_code_label">Module code:</string>
     <string name="class_type_label">Class Type:</string>
     <string name="add_class">Add Class</string>
+    <string name="delete_all_classes">Delete all classes.</string>
+    <string name="delete">Delete</string>
 
     <string-array name="days_array">
         <item>SUN</item>

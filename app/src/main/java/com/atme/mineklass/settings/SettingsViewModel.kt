@@ -46,6 +46,12 @@ class SettingsViewModel(application: Application) : AndroidViewModel(application
         }
     }
 
+    fun deleteAll(){
+        viewModelScope.launch{
+            repository.deleteAll()
+        }
+    }
+
     fun doneRefresh() {
         _refreshClassData.value = null
     }
