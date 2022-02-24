@@ -4,7 +4,10 @@ import android.os.Parcelable
 import com.atme.mineklass.database.UserClassData
 import com.atme.mineklass.utils.getTime
 import com.squareup.moshi.Json
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.IgnoredOnParcel
+
+import kotlinx.parcelize.Parcelize
+
 import java.util.*
 
 
@@ -25,7 +28,8 @@ data class ClassData(
     @Json(name = "Room") var room: String = "",
     @Json(name = "id") var id: Int
 ) : Parcelable {
-    var isToday = ALL_DAYS[day] == Date().day //TODO Check out Calender.DAY_OF_THE_WEEK
+    @IgnoredOnParcel
+    var isToday = ALL_DAYS[day] == Calendar.DAY_OF_WEEK
 
     fun toUserClassData(): UserClassData {
         return UserClassData(

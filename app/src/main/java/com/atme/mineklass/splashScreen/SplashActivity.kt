@@ -1,5 +1,6 @@
 package com.atme.mineklass.splashScreen
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -9,12 +10,11 @@ import androidx.lifecycle.ViewModelProvider
 import com.atme.mineklass.Constants
 import com.atme.mineklass.MainActivity
 import com.atme.mineklass.R
-import java.util.concurrent.Executor
 
-// TODO use viewPager for splash screen
+@SuppressLint("CustomSplashScreen")
 class SplashActivity : AppCompatActivity() {
 
-    private val viewModel : SplashViewModel by lazy { ViewModelProvider(this).get(SplashViewModel::class.java) }
+    private val viewModel : SplashViewModel by lazy { ViewModelProvider(this)[SplashViewModel::class.java] }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

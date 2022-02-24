@@ -20,6 +20,7 @@ import com.atme.mineklass.databinding.FragmentSettingsBinding
 import com.atme.mineklass.utils.JsonUtils.getClassFromJson
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import org.apache.commons.io.IOUtils
 import timber.log.Timber
 
 // TODO add progress dialogs.
@@ -47,7 +48,7 @@ class SettingsFragment : Fragment() {
         val binding = FragmentSettingsBinding.inflate(inflater, container, false)
 
 
-        viewModel.refreshClassData.observe(viewLifecycleOwner, {
+        viewModel.refreshClassData.observe(viewLifecycleOwner) {
             Timber.e("The state has changed to $it")
             if (it == true) {
 
@@ -63,7 +64,7 @@ class SettingsFragment : Fragment() {
                 viewModel.doneRefresh()
             }
 
-        })
+        }
 
         viewModel.insertFromJson.observe(viewLifecycleOwner) {
             if (it == true) {
@@ -131,34 +132,36 @@ class SettingsFragment : Fragment() {
         }
     }
 
+    // FIXME the application throws an error if the json is formatted
+    // TODO add loading animation
     private fun getFromJson(uri: Uri) {
 
         lifecycleScope.launch(Dispatchers.IO) {
             val inputStream = requireContext().contentResolver.openInputStream(uri)
-            if (inputStream != null) {
-                try {
-                    val bufferedReader = inputStream.bufferedReader()
-                    // The program will throw an exception if the json file is formatted.
-                    val jsonString = bufferedReader.use { it.readLine() }
 
-                    val classData =
-                        getClassFromJson(jsonString)
+
+            try {
+                inputStream.use {
+                    val jsonString = IOUtils.toString(it)
+                    val classData = getClassFromJson(jsonString)
 
                     if (classData != null) {
                         viewModel.insertFromJson(classData)
                     }
 
-                } catch (e: Exception) {
-                    Toast.makeText(
-                        requireContext(),
-                        "Something went wrong reading the file!",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    viewModel.doneInsert()
-
-                    Timber.e("File reading failed: ${e.message}")
                 }
+
+            } catch (e: Exception) {
+                Toast.makeText(
+                    requireContext(),
+                    "Something went wrong reading the file!",
+                    Toast.LENGTH_SHORT
+                ).show()
+                viewModel.doneInsert()
+
+                Timber.e("File reading failed: ${e.message}")
             }
+
         }
     }
 

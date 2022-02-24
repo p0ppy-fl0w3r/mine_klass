@@ -1,16 +1,15 @@
 package com.atme.mineklass
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.Toolbar
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
 import com.atme.mineklass.databinding.ActivityMainBinding
-import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -35,7 +34,7 @@ class MainActivity : AppCompatActivity() {
 
         // Make sure that navigation drawer only opens in the title page.
         navController.addOnDestinationChangedListener { controller, destination, _ ->
-            if (controller.graph.startDestination != destination.id) {
+            if (controller.graph.startDestinationId != destination.id) {
                 drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
                 binding.toolbar.visibility = Toolbar.VISIBLE
                 binding.navButton.visibility = ImageView.GONE
