@@ -2,14 +2,18 @@ package com.atme.mineklass.schedule
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.atme.mineklass.R
 import com.atme.mineklass.classData.ClassData
 import com.atme.mineklass.databinding.ScheduleItemBinding
+import timber.log.Timber
+import java.util.*
 
 
-class ScheduleAdapter(val clickListener: OnClickListener) :
+class ScheduleAdapter(private val clickListener: OnClickListener) :
     ListAdapter<ClassData, ScheduleAdapter.ScheduleViewHolder>(ScheduleDiffCallback()) {
 
     class ScheduleDiffCallback : DiffUtil.ItemCallback<ClassData>() {
@@ -27,6 +31,17 @@ class ScheduleAdapter(val clickListener: OnClickListener) :
 
         fun bind(item: ClassData) {
             binding.classItem = item
+
+            binding.constraintLayout.background =
+                ContextCompat.getDrawable(
+                    binding.constraintLayout.context,
+                   when(item.isToday){
+                       true -> R.drawable.today_card
+                       else -> R.drawable.item_card_rect
+                   }
+                )
+
+
             binding.executePendingBindings()
         }
 

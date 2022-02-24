@@ -12,7 +12,7 @@ import java.util.*
 
 
 private val ALL_DAYS =
-    hashMapOf("SUN" to 0, "MON" to 1, "TUE" to 2, "WED" to 3, "THU" to 4, "FRI" to 5)
+    hashMapOf("SUN" to 1, "MON" to 2, "TUE" to 3, "WED" to 4, "THU" to 5, "FRI" to 6)
 
 @Parcelize
 data class ClassData(
@@ -29,7 +29,7 @@ data class ClassData(
     @Json(name = "id") var id: Int
 ) : Parcelable {
     @IgnoredOnParcel
-    var isToday = ALL_DAYS[day] == Calendar.DAY_OF_WEEK
+    var isToday = ALL_DAYS[day] == Calendar.getInstance().get(Calendar.DAY_OF_WEEK)
 
     fun toUserClassData(): UserClassData {
         return UserClassData(

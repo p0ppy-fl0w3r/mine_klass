@@ -1,10 +1,8 @@
 package com.atme.mineklass.utils
 
-import android.graphics.Color
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.cardview.widget.CardView
 import androidx.databinding.BindingAdapter
 import com.atme.mineklass.R
 import com.atme.mineklass.classData.ClassData
@@ -30,14 +28,6 @@ fun TextView.setRoomString(classData: ClassData) {
     text = classData.room
 }
 
-@BindingAdapter("cardBackgroundColor")
-fun setCardBackgroundColor(cardView: CardView, isToday: Boolean) {
-    if (isToday) {
-        cardView.setCardBackgroundColor(cardView.context.getColor(R.color.secondaryLightColor))
-    } else {
-        cardView.setCardBackgroundColor(Color.parseColor("#FFFFFFFF"))
-    }
-}
 
 @BindingAdapter("isVisible")
 fun isVisible(textView: TextView, value: String){

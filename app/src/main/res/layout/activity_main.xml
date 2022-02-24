@@ -32,6 +32,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
                     android:background="?attr/colorPrimary"
+                    tools:visibility="gone"
                     android:theme="@style/ThemeOverlay.MaterialComponents.Light" />
 
             </FrameLayout>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.atme.mineklass.homePage.TitleViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        tools:context=".homePage.TitleFragment">
+
+        <DigitalClock
+            android:id="@+id/digitalClock"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+
+            android:textAppearance="@style/TextAppearance.AppCompat.Display3"
+            android:fontFamily="@font/amiko_semibold"
+            android:textColor="@color/primaryTransparent"
+            app:layout_constraintBottom_toTopOf="@+id/textClock"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextClock
+            android:id="@+id/textClock"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:format12Hour="dd MMM yyyy"
+            android:format24Hour="@null"
+            android:textColor="@color/primaryDarkColor"
+            android:textSize="24sp"
+            android:fontFamily="@font/amiko_semibold"
+            app:layout_constraintBottom_toTopOf="@+id/timeRemaining"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/digitalClock"
+            tools:text="31 May 2021" />
+
+        <RelativeLayout
+            android:id="@+id/titleCard"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@drawable/tile_card_background"
+            android:scaleType="fitXY"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/top_guideline">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/titleRecycler"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:itemCount="4"
+                tools:listitem="@layout/title_schedule_item" />
+        </RelativeLayout>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/top_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintGuide_begin="250dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/timeRemaining"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/secondaryLightColor"
+            android:fontFamily="@font/amiko_semibold"
+            app:layout_constraintBottom_toTopOf="@+id/titleCard"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textClock"
+            tools:text="Time till next class: 10:15" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

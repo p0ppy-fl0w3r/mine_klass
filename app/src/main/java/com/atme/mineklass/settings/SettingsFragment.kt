@@ -19,6 +19,7 @@ import com.atme.mineklass.Constants
 import com.atme.mineklass.databinding.FragmentSettingsBinding
 import com.atme.mineklass.utils.JsonUtils.getClassFromJson
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
 import org.apache.commons.io.IOUtils
 import timber.log.Timber
@@ -40,12 +41,14 @@ class SettingsFragment : Fragment() {
             }
         }
 
+    private lateinit var binding: FragmentSettingsBinding
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
 
-        val binding = FragmentSettingsBinding.inflate(inflater, container, false)
+        binding = FragmentSettingsBinding.inflate(inflater, container, false)
 
 
         viewModel.refreshClassData.observe(viewLifecycleOwner) {
@@ -69,6 +72,7 @@ class SettingsFragment : Fragment() {
         viewModel.insertFromJson.observe(viewLifecycleOwner) {
             if (it == true) {
                 viewModel.doneInsert()
+                binding.readProgress.visibility = View.GONE
                 Toast.makeText(context, "Added class from file.", Toast.LENGTH_SHORT).show()
             }
         }
@@ -132,14 +136,12 @@ class SettingsFragment : Fragment() {
         }
     }
 
-    // FIXME the application throws an error if the json is formatted
+
     // TODO add loading animation
     private fun getFromJson(uri: Uri) {
-
+        binding.readProgress.visibility = View.VISIBLE
         lifecycleScope.launch(Dispatchers.IO) {
             val inputStream = requireContext().contentResolver.openInputStream(uri)
-
-
             try {
                 inputStream.use {
                     val jsonString = IOUtils.toString(it)
@@ -147,6 +149,9 @@ class SettingsFragment : Fragment() {
 
                     if (classData != null) {
                         viewModel.insertFromJson(classData)
+                    }
+                    else{
+                        viewModel.doneInsert()
                     }
 
                 }

@@ -15,6 +15,11 @@ import com.atme.mineklass.databinding.FragmentScheduleBinding
 
 class ScheduleFragment : Fragment() {
 
+    private val viewModel: ScheduleViewModel by lazy {
+        ViewModelProvider(this)[ScheduleViewModel::class.java]
+    }
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -26,33 +31,30 @@ class ScheduleFragment : Fragment() {
             container,
             false
         )
-        val viewModel: ScheduleViewModel by lazy {
-            ViewModelProvider(this).get(ScheduleViewModel::class.java)
-        }
 
 
         val recycler = binding.recycler
-        val adapter = ScheduleAdapter(OnClickListener{
+        val adapter = ScheduleAdapter(OnClickListener {
             viewModel.navigateToClassDetail(it)
         })
 
-        viewModel.classLiveData.observe(viewLifecycleOwner, { classList ->
+        viewModel.classLiveData.observe(viewLifecycleOwner) { classList ->
             classList?.let { nClassList ->
                 val sortedList = nClassList.sortedBy { it.getValue() }
                 adapter.submitList(sortedList)
             }
-        })
+        }
 
-        viewModel.navigateToDetail.observe(viewLifecycleOwner, {
-            if(it != null){
+        viewModel.navigateToDetail.observe(viewLifecycleOwner) {
+            if (it != null) {
                 findNavController().navigate(ScheduleFragmentDirections.actionNavigateToDetails(it))
                 viewModel.doneNavigatingToDetail()
             }
-        })
+        }
 
         recycler.adapter = adapter
 
-        binding.addClassFab.setOnClickListener{
+        binding.addClassFab.setOnClickListener {
             findNavController().navigate(ScheduleFragmentDirections.scheduleToNew(Constants.ID_EDIT))
         }
 

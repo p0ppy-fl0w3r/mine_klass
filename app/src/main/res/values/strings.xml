@@ -17,7 +17,6 @@
     <string name="no_class_today">No classes for today!!</string>
     <string name="save">Save</string>
     <string name="change_data_url">Change data url…</string>
-    <string name="splash_warn">Warning!! The app is still in development!</string>
     <string name="data_from_internet">data_from_internet</string>
     <string name="pref_data">got_data_from_internet</string>
     <string name="read_from_json">Read data from a json file</string>
