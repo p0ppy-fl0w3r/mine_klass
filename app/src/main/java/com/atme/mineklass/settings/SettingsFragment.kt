@@ -19,18 +19,15 @@ import androidx.lifecycle.lifecycleScope
 import com.atme.mineklass.Constants
 import com.atme.mineklass.databinding.FragmentSettingsBinding
 import com.atme.mineklass.utils.JsonUtils.getClassFromJson
-import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
 import org.apache.commons.io.IOUtils
 import timber.log.Timber
 
-// TODO add progress dialogs.
-// TODO request permissions
+
 class SettingsFragment : Fragment() {
 
-    private val viewModel: SettingsViewModel by lazy { ViewModelProvider(this).get(SettingsViewModel::class.java) }
+    private val viewModel: SettingsViewModel by lazy { ViewModelProvider(this)[SettingsViewModel::class.java] }
 
     private val resultLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
@@ -94,10 +91,10 @@ class SettingsFragment : Fragment() {
         binding.darkModeSwitch.setOnClickListener {
             when (binding.darkModeSwitch.isChecked) {
                 true -> {
-                    Snackbar.make(
-                        binding.root,
+                    Toast.makeText(
+                        requireContext(),
                         "Dark mode will not work properly in older devices!",
-                        Snackbar.LENGTH_SHORT
+                        Toast.LENGTH_SHORT
                     ).show()
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
                 }

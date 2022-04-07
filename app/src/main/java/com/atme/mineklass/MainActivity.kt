@@ -24,6 +24,7 @@ class MainActivity : AppCompatActivity() {
 
         drawerLayout = binding.drawerLayout
 
+
         val navController = findNavController(R.id.navHostFragment)
 
         setSupportActionBar(binding.toolbar)

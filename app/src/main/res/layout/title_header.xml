@@ -1,27 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
 
-
-    <LinearLayout
-        android:id="@+id/text_linear_layout"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="62dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="62dp">
+        android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/header_text"
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:id="@+id/text_linear_layout"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/header_text_margin"
-            android:textAlignment="center"
-            android:fontFamily="@font/amiko_semibold"
-            android:textAppearance="?attr/textAppearanceHeadline5"
-            android:textColor="#FF000000"
-            tools:text="SUN" />
-    </LinearLayout>
+            android:layout_marginBottom="12dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="UseCompoundDrawables">
+
+            <TextView
+                android:id="@+id/header_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/header_text_margin"
+                android:fontFamily="@font/amiko_semibold"
+                android:textAlignment="center"
+                android:textAppearance="?attr/textAppearanceHeadline5"
+                android:textColor="#FF000000"
+                tools:text="SUN" />
+
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/tickImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:contentDescription="@string/today_desc"
+            android:src="@drawable/tick"
+            android:visibility="invisible"
+            android:layout_marginStart="12dp"
+            app:layout_constraintBottom_toBottomOf="@+id/text_linear_layout"
+            app:layout_constraintStart_toEndOf="@+id/text_linear_layout"
+            app:layout_constraintTop_toTopOf="@+id/text_linear_layout" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
 

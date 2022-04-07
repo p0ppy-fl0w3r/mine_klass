@@ -10,12 +10,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import androidx.viewpager2.widget.ViewPager2
+import com.atme.mineklass.Constants
 import com.atme.mineklass.R
 import com.atme.mineklass.databinding.FragmentTitleBinding
 import com.atme.mineklass.utils.formatTime
 import com.atme.mineklass.utils.getTime
 import timber.log.Timber
 import java.time.ZoneId
+import java.util.*
 
 
 /*
@@ -26,25 +29,38 @@ import java.time.ZoneId
 
 class TitleFragment : Fragment() {
 
-    private val viewModel: TitleViewModel by lazy { ViewModelProvider(this).get(TitleViewModel::class.java) }
+    private val viewModel: TitleViewModel by lazy { ViewModelProvider(this)[TitleViewModel::class.java] }
 
-    // TODO observe changes in data and change class accordingly
+    private lateinit var binding: FragmentTitleBinding
+
+
+    private var currentPage:Int = 0
+
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
 
-        val binding = DataBindingUtil.inflate<FragmentTitleBinding>(
+         binding = DataBindingUtil.inflate(
             inflater,
             R.layout.fragment_title,
             container,
             false
         )
 
-        val adapter = TitleRecyclerAdapter()
-        binding.titleRecycler.adapter = adapter
+        if (savedInstanceState != null){
+            currentPage = savedInstanceState.getInt("currentPage", 0)
+            binding.classPager.currentItem = currentPage
+        }
 
+
+        val viewPager = binding.classPager
+
+        val slideAdapter = ClassSlideAdapter()
+        viewPager.adapter = slideAdapter
+
+        // TODO migrate to datastore
         val pref = requireActivity().getPreferences(Activity.MODE_PRIVATE)
 
         if (!pref.contains(requireContext().getString(R.string.data_from_internet))) {
@@ -60,13 +76,19 @@ class TitleFragment : Fragment() {
             viewModel.updateDay()
         }
 
+        viewModel.getAllClassData()
 
-        viewModel.dayData.observe(viewLifecycleOwner, {
-            Timber.e("Day data updated.")
-            adapter.addHeaderAndSubmitList(it)
+        viewModel.allClassData.observe(viewLifecycleOwner){
+            slideAdapter.submitList(it)
+            currentPage = Calendar.getInstance().get(Calendar.DAY_OF_WEEK) - 1
+            viewPager.currentItem = currentPage
+        }
+
+        viewModel.dayData.observe(viewLifecycleOwner) {
+            Timber.i("Day data updated.")
             // Start the counter with the first class in the list
             viewModel.updateClassIndex(0)
-        })
+        }
 
         viewModel.currentClassIndex.observe(viewLifecycleOwner) {
 
@@ -99,4 +121,9 @@ class TitleFragment : Fragment() {
         return binding.root
     }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+
+        outState.putInt("currentPage", currentPage)
+    }
 }

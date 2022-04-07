@@ -4,14 +4,15 @@ package com.atme.mineklass.homePage
 import android.app.Application
 import android.os.CountDownTimer
 import androidx.lifecycle.*
+import com.atme.mineklass.ClassSlideWrapper
 import com.atme.mineklass.database.UserClassData
 import com.atme.mineklass.database.UserClassDatabase
 import com.atme.mineklass.repository.ClassRepository
 import kotlinx.coroutines.launch
 import timber.log.Timber
+import java.sql.Wrapper
 import java.util.Calendar
 
-// TODO handle wifi/internet turned off
 class TitleViewModel(application: Application) : AndroidViewModel(application) {
 
     private val _mDays =
@@ -25,14 +26,19 @@ class TitleViewModel(application: Application) : AndroidViewModel(application) {
             7 to "SAT"
         )
 
-    private val _dayData = MutableLiveData<List<UserClassData>>()
-
     private val second = 1000L
 
     private lateinit var timer: CountDownTimer
 
+    private val _dayData = MutableLiveData<List<UserClassData>>()
+
     val dayData: LiveData<List<UserClassData>>
         get() = _dayData
+
+    private val _allClassData = MutableLiveData<List<ClassSlideWrapper>>()
+
+    val allClassData: LiveData<List<ClassSlideWrapper>>
+        get() = _allClassData
 
     private val _remainingTime = MutableLiveData<Long>()
     val remainingTime: LiveData<Long>
@@ -52,6 +58,20 @@ class TitleViewModel(application: Application) : AndroidViewModel(application) {
 
     init {
         updateDay()
+    }
+
+    fun getAllClassData(){
+        viewModelScope.launch {
+        val classItemList = mutableListOf<ClassSlideWrapper>()
+            for (day in _mDays.values){
+                val dayList = repository.getDaySchedule(day)
+                classItemList.add(
+                     ClassSlideWrapper(day = day, classes =  dayList)
+                )
+            }
+
+            _allClassData.value = classItemList
+        }
     }
 
     fun updateDay() {

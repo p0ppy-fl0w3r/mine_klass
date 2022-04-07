@@ -1,6 +1,7 @@
 package com.atme.mineklass.homePage
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DiffUtil
@@ -16,6 +17,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import timber.log.Timber
 import java.lang.ClassCastException
+import java.util.*
 
 private const val HEADER_ITEM: Int = 0
 private const val USER_ITEM: Int = 1
@@ -29,7 +31,17 @@ private val FULL_DAYS = hashMapOf(
     "SAT" to "Saturday"
 )
 
-class TitleRecyclerAdapter : ListAdapter<DataItem, RecyclerView.ViewHolder>(ItemDiffUtils()) {
+private val SHORT_DAYS = listOf(
+    "SUN",
+    "MON",
+    "TUE",
+    "WED",
+    "THU",
+    "FRI",
+    "SAT",
+)
+
+class TitleRecyclerAdapter(private val day: String) : ListAdapter<DataItem, RecyclerView.ViewHolder>(ItemDiffUtils()) {
 
     private val adapterScope = CoroutineScope(Dispatchers.IO)
 
@@ -78,10 +90,9 @@ class TitleRecyclerAdapter : ListAdapter<DataItem, RecyclerView.ViewHolder>(Item
         adapterScope.launch {
             if (list != null) {
                 when (list.size) {
-                    // Empty list usually means saturday but just to be safe adding a different message
                     0 -> {
                         withContext(Dispatchers.Main) {
-                            submitList(listOf(DataItem.Header("No classes today!!")))
+                            submitList(listOf(DataItem.Header(day)))
 
                         }
                     }
@@ -136,6 +147,14 @@ class HeaderViewHolder(private val binding:TitleHeaderBinding) : RecyclerView.Vi
         if(headerText.isNullOrBlank()){
             headerText = header.day
         }
+
+        if( Calendar.getInstance().get(Calendar.DAY_OF_WEEK) == SHORT_DAYS.indexOf(header.day)+1 ){
+            binding.tickImage.visibility = View.VISIBLE
+        }
+        else{
+            binding.tickImage.visibility = View.GONE
+        }
+
         binding.headerText.text = headerText
         binding.textLinearLayout.setBackgroundResource(R.drawable.text_rect)
     }

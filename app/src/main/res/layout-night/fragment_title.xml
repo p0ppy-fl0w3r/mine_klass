@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.atme.mineklass.homePage.TitleViewModel" />
@@ -34,7 +35,7 @@
             android:id="@+id/textClock"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:format12Hour="dd MMM yyyy"
+            android:format12Hour="E dd MMM yyyy"
             android:format24Hour="@null"
             android:textColor="@color/primaryDarkColor"
             android:textSize="24sp"
@@ -44,30 +45,18 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/digitalClock"
-            tools:text="31 May 2021" />
+            tools:text="Thu 31 May 2021" />
 
-        <RelativeLayout
-            android:id="@+id/titleCard"
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/classPager"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:background="@drawable/tile_card_background"
-            android:scaleType="fitXY"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/top_guideline">
+            app:layout_constraintTop_toTopOf="@+id/top_guideline"
+            android:layout_height="0dp" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/titleRecycler"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="16dp"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:itemCount="4"
-                tools:listitem="@layout/title_schedule_item" />
-        </RelativeLayout>
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/top_guideline"
@@ -86,7 +75,7 @@
             android:layout_height="wrap_content"
             android:textColor="@color/secondaryLightColor"
             android:fontFamily="@font/amiko_semibold"
-            app:layout_constraintBottom_toTopOf="@+id/titleCard"
+            app:layout_constraintBottom_toTopOf="@+id/classPager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"

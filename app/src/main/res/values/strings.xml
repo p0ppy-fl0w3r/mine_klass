@@ -53,6 +53,7 @@
     <string name="delete">Delete</string>
     <string name="dark_mode">Dark mode</string>
     <string name="patron">Thanks to our generous patron Amrit Regmi !</string>
+    <string name="today_desc">Check mark to indicate that today is the class.</string>
 
     <string-array name="days_array">
         <item>SUN</item>
