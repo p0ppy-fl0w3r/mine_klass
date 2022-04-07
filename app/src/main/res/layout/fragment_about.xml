@@ -34,10 +34,24 @@
             android:layout_marginEnd="32dp"
             android:gravity="center"
             android:text="@string/about_desc_text"
+            android:fontFamily="@font/amiko_semibold"
             android:textColor="@color/color_white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/app_name_text" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:textSize="18sp"
+            android:fontFamily="@font/amiko_semibold"
+            android:text="@string/patron"
+            android:textColor="@color/color_white"
+            app:layout_constraintEnd_toEndOf="@+id/about_desc"
+            app:layout_constraintStart_toStartOf="@+id/about_desc"
+            app:layout_constraintTop_toBottomOf="@+id/about_desc" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

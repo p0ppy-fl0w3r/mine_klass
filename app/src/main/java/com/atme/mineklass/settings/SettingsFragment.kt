@@ -11,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -18,6 +19,7 @@ import androidx.lifecycle.lifecycleScope
 import com.atme.mineklass.Constants
 import com.atme.mineklass.databinding.FragmentSettingsBinding
 import com.atme.mineklass.utils.JsonUtils.getClassFromJson
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
@@ -77,12 +79,8 @@ class SettingsFragment : Fragment() {
             }
         }
 
-        binding.refreshButton.setOnClickListener {
-            viewModel.refreshClassData()
-        }
-
-        binding.changeButton.setOnClickListener {
-            Toast.makeText(context, "To be implemented!!", Toast.LENGTH_SHORT).show()
+        viewModel.darkMode.observe(viewLifecycleOwner) {
+            binding.darkModeSwitch.isChecked = it == true
         }
 
         binding.readFromJson.setOnClickListener {
@@ -91,6 +89,24 @@ class SettingsFragment : Fragment() {
 
         binding.deleteButton.setOnClickListener {
             viewModel.deleteAll()
+        }
+
+        binding.darkModeSwitch.setOnClickListener {
+            when (binding.darkModeSwitch.isChecked) {
+                true -> {
+                    Snackbar.make(
+                        binding.root,
+                        "Dark mode will not work properly in older devices!",
+                        Snackbar.LENGTH_SHORT
+                    ).show()
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                }
+                else -> {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                }
+            }
+
+            viewModel.changeDarkStatus(binding.darkModeSwitch.isChecked)
         }
 
         return binding.root
@@ -149,8 +165,7 @@ class SettingsFragment : Fragment() {
 
                     if (classData != null) {
                         viewModel.insertFromJson(classData)
-                    }
-                    else{
+                    } else {
                         viewModel.doneInsert()
                     }
 

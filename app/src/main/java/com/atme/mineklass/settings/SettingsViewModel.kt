@@ -8,6 +8,7 @@ import com.atme.mineklass.database.UserClassDatabase
 import com.atme.mineklass.repository.ClassRepository
 import kotlinx.coroutines.launch
 import com.atme.mineklass.classData.ClassData
+import com.atme.mineklass.datastore.SettingPreferences
 import kotlinx.coroutines.Dispatchers
 import timber.log.Timber
 
@@ -24,19 +25,10 @@ class SettingsViewModel(application: Application) : AndroidViewModel(application
     private val database = UserClassDatabase.getInstance(getApplication())
     private val repository = ClassRepository(database)
 
+    private val dataStore = SettingPreferences(application)
 
-    fun refreshClassData() {
-        viewModelScope.launch(Dispatchers.IO) {
-            try {
-                repository.deleteAll()
-                repository.updateDatabase()
-                _refreshClassData.postValue(true)
-            } catch (e: Exception) {
-                Timber.e("Could not refresh data ${e.message}")
-                _refreshClassData.postValue(false)
-            }
-        }
-    }
+    val darkMode = dataStore.darkModeStatus.asLiveData()
+
 
     fun insertFromJson(classData: List<ClassData>) {
         viewModelScope.launch {
@@ -46,8 +38,8 @@ class SettingsViewModel(application: Application) : AndroidViewModel(application
         }
     }
 
-    fun deleteAll(){
-        viewModelScope.launch{
+    fun deleteAll() {
+        viewModelScope.launch {
             repository.deleteAll()
         }
     }
@@ -58,6 +50,16 @@ class SettingsViewModel(application: Application) : AndroidViewModel(application
 
     fun doneInsert() {
         _insertFromJson.value = null
+    }
+
+    fun changeDarkStatus(value: Boolean?) {
+        viewModelScope.launch {
+            if (value == true) {
+                dataStore.changeDarkMode(true)
+            } else {
+                dataStore.changeDarkMode(false)
+            }
+        }
     }
 
 }

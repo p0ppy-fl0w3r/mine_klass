@@ -12,7 +12,7 @@
     <string name="splash_image">Splash Image.</string>
     <string name="navigation_drawer_button">Navigation drawer button</string>
     <string name="class_view_separator">Class view separator</string>
-    <string name="about_desc_text">Scheduler application for Islington College that will tell you how long you\'ve got till your next class.</string>
+    <string name="about_desc_text">Scheduler application that will tell you how long you\'ve got till your next class.</string>
     <string name="time_remaining">Time remaining for next class: %1$s</string>
     <string name="no_class_today">No classes for today!!</string>
     <string name="save">Save</string>
@@ -51,6 +51,8 @@
     <string name="add_class">Add Class</string>
     <string name="delete_all_classes">Delete all classes.</string>
     <string name="delete">Delete</string>
+    <string name="dark_mode">Dark mode</string>
+    <string name="patron">Thanks to our generous patron Amrit Regmi !</string>
 
     <string-array name="days_array">
         <item>SUN</item>
