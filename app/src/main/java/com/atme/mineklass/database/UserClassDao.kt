@@ -1,10 +1,7 @@
 package com.atme.mineklass.database
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 
 @Dao
 interface UserClassDao {
@@ -32,5 +29,8 @@ interface UserClassDao {
 
     @Query("SELECT id FROM schedule_table ORDER BY ID DESC LIMIT 1")
     suspend fun getLastId(): Int?
+
+    @Delete
+    suspend fun deleteClass(userClassData: UserClassData)
 
 }

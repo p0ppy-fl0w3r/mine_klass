@@ -43,6 +43,11 @@
         <action
             android:id="@+id/details_to_edit"
             app:destination="@id/editClassDetail" />
+        <action
+            android:id="@+id/detailsToSchedule"
+            app:destination="@id/scheduleFragment"
+            app:popUpTo="@id/scheduleFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/editClassDetail"

@@ -29,8 +29,6 @@
                 android:textAppearance="?attr/textAppearanceHeadline5"
                 android:textColor="#FF000000"
                 tools:text="SUN" />
-
-
         </LinearLayout>
 
         <ImageView

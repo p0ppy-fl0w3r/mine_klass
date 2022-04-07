@@ -56,4 +56,8 @@ class ClassRepository(private val database: UserClassDatabase) {
     suspend fun getLastId():Int?{
         return database.scheduleDao.getLastId()
     }
+
+    suspend fun deleteClass(userClassData: UserClassData){
+        database.scheduleDao.deleteClass(userClassData)
+    }
 }

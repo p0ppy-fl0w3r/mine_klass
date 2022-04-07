@@ -22,7 +22,7 @@
             android:adjustViewBounds="true"
             android:contentDescription="@string/class_type_desc"
             app:setClassImage="@{classData.class_type}"
-            tools:src="@drawable/tutor" />
+            tools:src="@drawable/lecture" />
 
         <TextView
             android:id="@+id/classType"
@@ -95,14 +95,31 @@
 
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
         <com.google.android.material.button.MaterialButton
             android:id="@+id/editClassDetail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
             android:layout_gravity="center"
             android:fontFamily="@font/amiko_semibold"
             android:text="@string/edit"
             android:textAllCaps="false" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/deleteClass"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="10dp"
+            android:fontFamily="@font/amiko_semibold"
+            android:text="@string/delete"
+            android:textAllCaps="false" />
+        </LinearLayout>
 
     </LinearLayout>
 </layout>
