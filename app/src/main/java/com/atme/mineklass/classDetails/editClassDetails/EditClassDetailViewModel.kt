@@ -31,13 +31,8 @@ class EditClassDetailViewModel(application: Application) : AndroidViewModel(appl
 
     fun addNewClass(classData: ClassData) {
         viewModelScope.launch {
-            val oldId = repository.getLastId()
-            if (oldId != null) {
-                val newId = oldId + 1
-                classData.id = newId
-                repository.insertClass(classData)
-                _insertToDatabase.value = true
-            }
+            repository.insertClass(classData)
+            _insertToDatabase.value = true
         }
     }
 

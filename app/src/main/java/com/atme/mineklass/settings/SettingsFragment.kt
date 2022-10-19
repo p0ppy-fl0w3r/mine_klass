@@ -85,6 +85,7 @@ class SettingsFragment : Fragment() {
         }
 
         binding.deleteButton.setOnClickListener {
+            Toast.makeText(requireContext(), "Deleted all data!", Toast.LENGTH_SHORT).show()
             viewModel.deleteAll()
         }
 
